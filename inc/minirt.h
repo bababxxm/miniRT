@@ -1,0 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/08 13:17:12 by sklaokli          #+#    #+#             */
+/*   Updated: 2025/05/08 17:20:04 by sklaokli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef MINIRT_H
+# define MINIRT_H
+
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdio.h>
+# include <math.h>
+
+# include "gct.h"
+# include "MLX42/MLX42.h"
+# include "MLX42/MLX42_Int.h"
+
+typedef struct s_rt
+{
+	void	*ptr;
+}	t_rt;
+
+
+#endif
