@@ -6,7 +6,7 @@
 #    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/08 13:16:53 by sklaokli          #+#    #+#              #
-#    Updated: 2025/05/31 18:51:59 by sklaokli         ###   ########.fr        #
+#    Updated: 2025/05/31 18:55:45 by sklaokli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFT_DIR	:=	lib/libft
 GCT_DIR		:=	lib/gct
 MLX_DIR		:=	lib/mlx
 
-INC			:=	-I$(INC_DIR) -I$(GCT_DIR)/include -I$(MLX_DIR)/include
+INC			:=	-I$(INC_DIR) -I$(LIBFT_DIR)/inc -I$(GCT_DIR)/inc -I$(MLX_DIR)/include
 DEP			:=	$(INC_DIR)/miniRT.h
 
 LIBFT		:=	$(LIB_DIR)/libft.a
