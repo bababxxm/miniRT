@@ -6,91 +6,95 @@
 #    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/08 13:16:53 by sklaokli          #+#    #+#              #
-#    Updated: 2025/05/08 18:40:52 by sklaokli         ###   ########.fr        #
+#    Updated: 2025/05/31 18:51:59 by sklaokli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-## Libraries
-NAME		=	miniRT
-GCT			=	$(GCT_DIR)/gct.a
-MLX			=	$(MLX_DIR)/build/libmlx42.a
-LIB			=	$(GCT) $(MLX)
+NAME		:=	miniRT
 
-## Paths
 SRC_DIR		:=	src
 OBJ_DIR		:=	obj
 INC_DIR		:=	inc
+LIBFT_DIR	:=	lib/libft
 GCT_DIR		:=	lib/gct
 MLX_DIR		:=	lib/mlx
 
-## Subdirectories
-SUBDIRS		:=	main
-main_FILES 	:=	main.c
-
-## All sources and objects
-SRC_FILES	:=	$(foreach dir,$(SUBDIRS), \
-				$(addprefix $(SRC_DIR)/$(dir)/,$($(dir)_FILES)))
-
-OBJ_FILES	:=	$(foreach dir,$(SUBDIRS), \
-				$(addprefix $(OBJ_DIR)/$(dir)/,$($(dir)_FILES:.c=.o)))
-
-## Include
 INC			:=	-I$(INC_DIR) -I$(GCT_DIR)/include -I$(MLX_DIR)/include
+DEP			:=	$(INC_DIR)/miniRT.h
 
-## Commands
-RM			:=	rm -f
-CC			:=	cc
-WFLAGS		:=	-Wall -Wextra -Werror
-MLXFLAGS	:=	-Wunreachable-code -Ofast -g3 -ldl -lglfw -pthread -lm
-VFLAGS		:=	--leak-check=full --show-leak-kinds=all
+LIBFT		:=	$(LIB_DIR)/libft.a
+GCT			:=	$(GCT_DIR)/gct.a
+MLX			:=	$(MLX_DIR)/build/libmlx42.a
 
-## Colors
-CYAN		:=	\033[0;36m
-GREEN		:=	\033[0;32m
-BLUE		:=	\033[0;34m
+LIB			:=	$(GCT) $(MLX)
+
+FILES		:=	\
+				main.c
+
+SRC			:=	$(addprefix $(SRC_DIR)/, $(FILES))
+OBJ			:=	$(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
+
+COMPILED	:=	0
+TOTAL_FILES	:=	$(words $(OBJ))
+
+CYAN		:=	\033[1;36m
+GREEN		:=	\033[1;32m
+RED			:=	\033[1;31m
+BLUE		:=	\033[1;34m
+YELLOW		:=	\033[1;33m
 RESET		:=	\033[0m
 
-## Compilation rule
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@ mkdir -p $(dir $@)
-	@ echo "$(BLUE)Compiling $<$(RESET)"
-	@ $(CC) $(WFLAGS) $(INC) -c $< -o $@
+CC			:=	cc
+RM			:=	rm -f
+AR			:=	ar rcs
+WFLAGS		:=	-Wall -Wextra -Werror
+VFLAGS		:=	--leak-check=full --show-leak-kinds=all
+FDFLAGS		:=	--track-fds=yes --trace-children=yes
+HFLAGS		:=	--tool=helgrind
 
-## Targets
-all: $(NAME)
+$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c $(DEPS)
+				@ mkdir -p $(dir $@)
+				@ $(eval COMPILED=$(shell echo $$(($(COMPILED)+1))))
+				@ PERCENT=$$(($(COMPILED)*100/$(TOTAL_FILES))); \
+				echo "$(BLUE)[$(COMPILED)/$(TOTAL_FILES)] Compiling $< ($$PERCENT%)$(RESET)\r"; \
+				$(CC) $(WFLAGS) $(INC) -c $< -o $@
 
-$(NAME): Makefile $(OBJ_FILES) $(LIB)
-	@ $(CC) $(WFLAGS) $(MLXFLAGS) $(OBJ_FILES) $(GCT) $(MLX) $(INC) -o $(NAME)
-	@ echo "$(GREEN)[OK] $(NAME) built successfully.$(RESET)"
+all:			$(NAME)
 
-$(LIB): Makefile
-	@ if [ ! -d "$(MLX_DIR)" ]; then \
-		git clone https://github.com/codam-coding-college/MLX42.git $(MLX_DIR); \
-	fi
-	@ if [ ! -d "$(GCT_DIR)" ]; then \
-		git clone git@github.com:bababxxm/gct.git $(GCT_DIR); \
-	fi
-	@ cmake -S $(MLX_DIR) -B $(MLX_DIR)/build && $(MAKE) -sC $(MLX_DIR)/build
-	@ $(MAKE) -sC $(GCT_DIR)
+$(NAME):		Makefile clone $(OBJ) $(LIB)
+				@ $(CC) $(WFLAGS) $(MLXFLAGS) $(OBJ) $(GCT) $(MLX) $(INC) -o $(NAME)
+				@ echo "$(GREEN)[OK] $(NAME) built successfully.$(RESET)"
 
-lib_clean:
-	@ $(MAKE) -sC $(GCT_DIR) clean
+$(LIB):			Makefile $(OBJ)
+				@ cmake -S $(MLX_DIR) -B $(MLX_DIR)/build && $(MAKE) -sC $(MLX_DIR)/build
+				@ $(MAKE) -sC $(LIBFT_DIR)
+				@ $(MAKE) -sC $(GCT_DIR)
 
-lib_fclean:
-	@ $(RM) -rf $(MLX_DIR)/build
-	@ $(MAKE) -sC $(GCT_DIR) fclean
+clone:			Makefile
+				@ if [ ! -d "$(LIBFT_DIR)" ]; then git clone git@github.com:bababxxm/libft.git $(LIBFT_DIR); fi
+				@ if [ ! -d "$(GCT_DIR)" ]; then git clone git@github.com:bababxxm/gct.git $(GCT_DIR); fi
+				@ if [ ! -d "$(MLX_DIR)" ]; then git clone https://github.com/codam-coding-college/MLX42.git $(MLX_DIR); fi
 
-clean: lib_clean
-	@ $(RM) -rf $(OBJ_DIR)
-	@ echo "$(CYAN)[Cleaned] object files removed.$(RESET)"
+lib_clean:		Makefile
+				@ if [ -d "$(LIBFT_DIR)" ]; then $(MAKE) -sC $(LIBFT_DIR) clean; fi
+				@ if [ -d "$(GCT_DIR)" ]; then $(MAKE) -sC $(GCT_DIR) clean; fi
 
-fclean: lib_fclean clean
-	@ $(RM) -f $(NAME)
-	@ echo "$(CYAN)[Cleaned] $(NAME) removed.$(RESET)"
+lib_fclean:		Makefile
+				@ if [ -d "$(LIBFT_DIR)" ]; then $(MAKE) -sC $(LIBFT_DIR) fclean; fi
+				@ if [ -d "$(GCT_DIR)" ]; then $(MAKE) -sC $(GCT_DIR) fclean; fi
+				@ if [ -d "$(MLX_DIR)" ]; then $(RM) -rf $(MLX_DIR)/build; fi
 
-re: fclean all
+clean:			Makefile lib_clean
+				@ $(RM) -rf $(OBJ_DIR)
+				@ echo "$(CYAN)$(NAME) object files cleaned.$(RESET)"
 
-valgrind: $(NAME)
-	@ valgrind $(VFLAGS) ./$(NAME)
+fclean: 		Makefile lib_fclean clean
+				@ $(RM) -f $(NAME)
+				@ echo "$(CYAN)$(NAME) executable files cleaned.$(RESET)"
 
-.PHONY: all clean fclean re
+re:				Makefile fclean all
+
+valgrind:		Makefile $(NAME)
+				@ valgrind $(VFLAGS) ./$(NAME)
+
+.PHONY:			all clean fclean re clone valgrind
