@@ -6,7 +6,7 @@
 #    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/08 13:16:53 by sklaokli          #+#    #+#              #
-#    Updated: 2025/05/31 19:03:38 by sklaokli         ###   ########.fr        #
+#    Updated: 2025/06/06 15:45:42 by sklaokli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,21 +15,26 @@ NAME		:=	miniRT
 SRC_DIR		:=	src
 OBJ_DIR		:=	obj
 INC_DIR		:=	inc
+
 LIBFT_DIR	:=	lib/libft
 GCT_DIR		:=	lib/gct
+GNL_DIR		:=	lib/gnl
 MLX_DIR		:=	lib/mlx
 
-INC			:=	-I$(INC_DIR) -I$(LIBFT_DIR)/inc -I$(GCT_DIR)/inc -I$(MLX_DIR)/include
+INC			:=	-I$(INC_DIR) -I$(LIBFT_DIR)/inc \
+				-I$(GCT_DIR)/inc -I$(GNL_DIR)/includes \
+				-I$(MLX_DIR)/include
+
 DEP			:=	$(INC_DIR)/miniRT.h
 
-LIBFT		:=	$(LIB_DIR)/libft.a
-GCT			:=	$(GCT_DIR)/gct.a
-MLX			:=	$(MLX_DIR)/build/libmlx42.a
+LIBFT		:=	bin/libft.a
+GCT			:=	bin/gct.a
+MLX			:=	bin/libmlx42.a
+GNL			:=	bin/gnl.a
 
 LIB			:=	$(GCT) $(MLX)
 
-FILES		:=	\
-				main.c
+FILES		:=	main.c
 
 SRC			:=	$(addprefix $(SRC_DIR)/, $(FILES))
 OBJ			:=	$(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
@@ -61,8 +66,8 @@ $(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c $(DEPS)
 
 all:			$(NAME)
 
-$(NAME):		Makefile $(OBJ) $(LIB)
-				@ $(CC) $(WFLAGS) $(MLXFLAGS) $(OBJ) $(GCT) $(MLX) $(INC) -o $(NAME)
+$(NAME):		Makefile $(OBJ)
+				@ $(CC) $(WFLAGS) $(MLXFLAGS) $(OBJ) $(LIBFT) $(GNL) $(GCT) $(MLX) $(INC) -o $(NAME)
 				@ echo "$(GREEN)[OK] $(NAME) built successfully.$(RESET)"
 
 $(LIB):			Makefile $(OBJ)
@@ -84,11 +89,11 @@ lib_fclean:		Makefile
 				@ if [ -d "$(GCT_DIR)" ]; then $(MAKE) -sC $(GCT_DIR) fclean; fi
 				@ if [ -d "$(MLX_DIR)" ]; then $(RM) -rf $(MLX_DIR)/build; fi
 
-clean:			Makefile lib_clean
+clean:			Makefile
 				@ $(RM) -rf $(OBJ_DIR)
 				@ echo "$(CYAN)$(NAME) object files cleaned.$(RESET)"
 
-fclean: 		Makefile lib_fclean clean
+fclean: 		Makefile clean
 				@ $(RM) -f $(NAME)
 				@ echo "$(CYAN)$(NAME) executable files cleaned.$(RESET)"
 
