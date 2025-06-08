@@ -4,3 +4,5 @@ en.subject.pdf
 miniRT
 .vscode
 *.rt
+keep
+build

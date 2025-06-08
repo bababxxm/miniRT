@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 14:07:09 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/06/08 16:34:43 by sklaokli         ###   ########.fr       */
+/*   Created: 2025/06/08 17:34:44 by sklaokli          #+#    #+#             */
+/*   Updated: 2025/06/08 18:03:41 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 int	main(int argc, char **argv)
 {
+	(void)argc;
+	(void)argv;
 	return (0);
 }
