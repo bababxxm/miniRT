@@ -3,3 +3,4 @@ obj
 en.subject.pdf
 miniRT
 .vscode
+*.rt

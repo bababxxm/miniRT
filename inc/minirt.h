@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 13:17:12 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/06/06 15:39:13 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/06/08 16:13:56 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,13 @@ typedef struct s_vector
 
 typedef enum s_idtf
 {
+	UNKNOWN,
 	AMBIENT,
 	CAMERA,
 	LIGHT,
 	SPHERE,
 	PLANE,
-	CYLINDER
+	CYLINDER,
 }	t_idtf;
 
 typedef struct s_ambient

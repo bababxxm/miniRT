@@ -6,7 +6,7 @@
 #    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/08 13:16:53 by sklaokli          #+#    #+#              #
-#    Updated: 2025/06/06 15:45:42 by sklaokli         ###   ########.fr        #
+#    Updated: 2025/06/08 15:47:01 by sklaokli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ GNL			:=	bin/gnl.a
 
 LIB			:=	$(GCT) $(MLX)
 
-FILES		:=	main.c
+FILES		:=	main.c \
+				parser.c
 
 SRC			:=	$(addprefix $(SRC_DIR)/, $(FILES))
 OBJ			:=	$(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
