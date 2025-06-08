@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/05/08 13:16:53 by sklaokli          #+#    #+#              #
-#    Updated: 2025/06/06 15:45:42 by sklaokli         ###   ########.fr        #
+#    Created: 2025/06/08 16:45:27 by sklaokli          #+#    #+#              #
+#    Updated: 2025/06/08 19:59:47 by sklaokli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,24 +15,18 @@ NAME		:=	miniRT
 SRC_DIR		:=	src
 OBJ_DIR		:=	obj
 INC_DIR		:=	inc
+LIB_DIR		:=	lib
 
-LIBFT_DIR	:=	lib/libft
-GCT_DIR		:=	lib/gct
-GNL_DIR		:=	lib/gnl
-MLX_DIR		:=	lib/mlx
+DEP			:=	$(addprefix $(INC_DIR)/, minirt.h)
+LIBFT_DIR	:=	$(addprefix $(LIB_DIR)/, libft)
+MLX_DIR		:=	$(addprefix $(LIB_DIR)/, mlx42)
 
-INC			:=	-I$(INC_DIR) -I$(LIBFT_DIR)/inc \
-				-I$(GCT_DIR)/inc -I$(GNL_DIR)/includes \
-				-I$(MLX_DIR)/include
+INC			:=	-I$(INC_DIR) -I$(LIBFT_DIR)/inc -I$(MLX_DIR)/include
 
-DEP			:=	$(INC_DIR)/miniRT.h
+LIBFT		:=	$(LIBFT_DIR)/libft.a
+MLX			:=	$(MLX_DIR)/build/libmlx42.a
 
-LIBFT		:=	bin/libft.a
-GCT			:=	bin/gct.a
-MLX			:=	bin/libmlx42.a
-GNL			:=	bin/gnl.a
-
-LIB			:=	$(GCT) $(MLX)
+LIB			:=	$(LIBFT) $(MLX)
 
 FILES		:=	main.c
 
@@ -52,12 +46,15 @@ RESET		:=	\033[0m
 CC			:=	cc
 RM			:=	rm -f
 AR			:=	ar rcs
-WFLAGS		:=	-Wall -Wextra -Werror
-VFLAGS		:=	--leak-check=full --show-leak-kinds=all
-FDFLAGS		:=	--track-fds=yes --trace-children=yes
-HFLAGS		:=	--tool=helgrind
 
-$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c $(DEPS)
+WFLAGS		:=	-Wall -Wextra -Werror
+MLXFLAGS	:=	-ldl -lglfw -pthread -lm
+LFLAGS		:=	--leak-check=full --show-leak-kinds=all
+FDFLAGS		:=	--track-fds=yes --trace-children=yes
+
+FLAGS		:=	$(WFLAGS) $(MLXFLAGS) 
+
+$(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c $(DEP) 
 				@ mkdir -p $(dir $@)
 				@ $(eval COMPILED=$(shell echo $$(($(COMPILED)+1))))
 				@ PERCENT=$$(($(COMPILED)*100/$(TOTAL_FILES))); \
@@ -66,40 +63,29 @@ $(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c $(DEPS)
 
 all:			$(NAME)
 
-$(NAME):		Makefile $(OBJ)
-				@ $(CC) $(WFLAGS) $(MLXFLAGS) $(OBJ) $(LIBFT) $(GNL) $(GCT) $(MLX) $(INC) -o $(NAME)
+$(NAME):		Makefile $(LIB) $(OBJ)
+				@ $(CC) $(FLAGS) $(LIB) $(OBJ) $(INC) -o $(NAME)
 				@ echo "$(GREEN)[OK] $(NAME) built successfully.$(RESET)"
 
-$(LIB):			Makefile $(OBJ)
-				@ cmake -S $(MLX_DIR) -B $(MLX_DIR)/build && $(MAKE) -sC $(MLX_DIR)/build
+$(LIB):			Makefile
+				@ cmake -S $(MLX_DIR) -B $(MLX_DIR)/build
+				@ $(MAKE) -sC $(MLX_DIR)/build
 				@ $(MAKE) -sC $(LIBFT_DIR)
-				@ $(MAKE) -sC $(GCT_DIR)
-
-clone:			Makefile
-				@ if [ ! -d "$(LIBFT_DIR)" ]; then git clone git@github.com:bababxxm/libft.git $(LIBFT_DIR); fi
-				@ if [ ! -d "$(GCT_DIR)" ]; then git clone git@github.com:bababxxm/gct.git $(GCT_DIR); fi
-				@ if [ ! -d "$(MLX_DIR)" ]; then git clone https://github.com/codam-coding-college/MLX42.git $(MLX_DIR); fi
-
-lib_clean:		Makefile
-				@ if [ -d "$(LIBFT_DIR)" ]; then $(MAKE) -sC $(LIBFT_DIR) clean; fi
-				@ if [ -d "$(GCT_DIR)" ]; then $(MAKE) -sC $(GCT_DIR) clean; fi
-
-lib_fclean:		Makefile
-				@ if [ -d "$(LIBFT_DIR)" ]; then $(MAKE) -sC $(LIBFT_DIR) fclean; fi
-				@ if [ -d "$(GCT_DIR)" ]; then $(MAKE) -sC $(GCT_DIR) fclean; fi
-				@ if [ -d "$(MLX_DIR)" ]; then $(RM) -rf $(MLX_DIR)/build; fi
 
 clean:			Makefile
-				@ $(RM) -rf $(OBJ_DIR)
+				@ $(MAKE) -sC $(LIBFT_DIR) clean
+				@ $(RM) -r $(OBJ_DIR)
 				@ echo "$(CYAN)$(NAME) object files cleaned.$(RESET)"
 
 fclean: 		Makefile clean
-				@ $(RM) -f $(NAME)
+				@ $(MAKE) -sC $(LIBFT_DIR) fclean
+				@ $(RM) -r $(MLX_DIR)/build
+				@ $(RM) $(NAME)
 				@ echo "$(CYAN)$(NAME) executable files cleaned.$(RESET)"
 
 re:				Makefile fclean all
 
-valgrind:		Makefile $(NAME)
-				@ valgrind $(VFLAGS) ./$(NAME)
+leaks:			Makefile $(NAME)
+				@ valgrind $(LFLAGS) ./$(NAME)
 
-.PHONY:			all clean fclean re clone valgrind
+.PHONY:			all clean fclean re leaks
