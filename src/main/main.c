@@ -6,11 +6,17 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:34:44 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/06/09 20:39:11 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/06/10 01:54:07 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+/*
+
+	git branch 'pkhienko'
+
+*/
 
 int	main(int argc, char **argv)
 {
