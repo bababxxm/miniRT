@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_malloc.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/16 00:01:29 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/06/08 20:30:27 by sklaokli         ###   ########.fr       */
+/*   Created: 2025/06/08 23:34:17 by sklaokli          #+#    #+#             */
+/*   Updated: 2025/06/09 00:14:21 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minirt.h"
 
-void	*ft_malloc(size_t size)
+void	ft_perror(char *msg)
 {
-	void	*ptr;
-
-	ptr = malloc(size);
-	if (!ptr)
-		ft_panic("Malloc failed");
-	return (ptr);
+	if (msg)
+	{
+		while (*msg)
+			write(2, msg++, 1);
+		write(2, "\n", 1);
+	}
+	exit(1);
 }

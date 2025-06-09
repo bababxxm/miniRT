@@ -6,7 +6,7 @@
 #    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/08 16:45:27 by sklaokli          #+#    #+#              #
-#    Updated: 2025/06/08 19:59:47 by sklaokli         ###   ########.fr        #
+#    Updated: 2025/06/09 00:19:58 by sklaokli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,12 @@ MLX			:=	$(MLX_DIR)/build/libmlx42.a
 
 LIB			:=	$(LIBFT) $(MLX)
 
-FILES		:=	main.c
+FILES		:=	\
+				main/main.c \
+				main/utils.c \
+				\
+				parser/file.c \
+				parser/utils.c
 
 SRC			:=	$(addprefix $(SRC_DIR)/, $(FILES))
 OBJ			:=	$(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))
@@ -64,7 +69,7 @@ $(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c $(DEP)
 all:			$(NAME)
 
 $(NAME):		Makefile $(LIB) $(OBJ)
-				@ $(CC) $(FLAGS) $(LIB) $(OBJ) $(INC) -o $(NAME)
+				@ $(CC) $(FLAGS) $(OBJ) $(LIB) $(INC) -o $(NAME)
 				@ echo "$(GREEN)[OK] $(NAME) built successfully.$(RESET)"
 
 $(LIB):			Makefile
