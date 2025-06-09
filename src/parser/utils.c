@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 23:32:42 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/06/09 02:34:57 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/06/09 21:47:53 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,33 +44,100 @@ void	parse_argument(int argc, char **argv)
 	}
 }
 
-int	parse_int()
+int	parse_int(int *ptr, char *str, int min, int max)
 {
+	int		nbr;
+	char	*start;
 
+	if (!str || !ptr)
+		return (false);
+	str = ft_strskip(str, WHITESPACE, true);
+	start = str;
+	str = ft_strskip(str, "+-", true);
+	str = ft_strskip(str, "0123456789", true);
+	if (str == start)
+		return (false);
+	str = ft_strskip(str, WHITESPACE, true);
+	if (*str != '\0')
+		return (false);
+	nbr = ft_atoi(start);
+	if (nbr < min || nbr > max)
+		return (false);
+	*ptr = nbr;
+	return (true);
 }
 
-float	parse_float()
+int	before_dot(char **str)
 {
-	
+	char	*ptr;
+	bool	has_digits;
+
+	ptr = *str;
+	has_digits = false;
+	*str = ft_strskip(*str, "0123456789", true);
+	if (*str > ptr)
+		has_digits = true;
+	return (has_digits);
 }
 
-t_rgb	parse_rgb(char *palette)
+int	after_dot(char **str)
 {
-	t_rgb	rgb;
+	char	*ptr;
+	bool	has_digits;
+
+	has_digits = false;
+	if (**str == '.')
+	{
+		(*str)++;
+		ptr = *str;
+		*str = ft_strskip(*str, "0123456789", true);
+		if (*str > ptr)
+			has_digits = true;
+	}
+	return (has_digits);
+}
+
+int	parse_float(float *ptr, char *str, float min, float max)
+{
+	float	nbr;
+	char	*tmp;
+	char	*start;
+
+	if (!str || !ptr)
+		return (false);
+	str = ft_strskip(str, WHITESPACE, true);
+	start = str;
+	str = ft_strskip(str, "+-", true);
+	if (!before_dot(&str) || !after_dot(&str))
+		return (false);
+	str = ft_strskip(str, WHITESPACE, true);
+	if (*str != '\0')
+		return (false);
+	nbr = ft_atof(start);
+	if (nbr < min || nbr > max)
+		return (false);
+	*ptr = nbr;
+	return (true);
+}
+
+int	parse_rgb(t_rgb *color, char *palette)
+{
 	char	**args;
 
-	rgb = (t_rgb){0, 0, 0};
 	args = ft_split(palette, ',');
 	if (!args || count_args(args) != 3)
 	{
-		ft_free_2d(args);
-		return (rgb);
+		ft_free_2d((void **)args);
+		return (false);
 	}
-	rgb.r = ft_atoi(args[0]);
-	rgb.g = ft_atoi(args[1]);
-	rgb.b = ft_atoi(args[2]);
-	ft_free_2d(args);
-	return (rgb);
+	if (!parse_uint(&color->r, args[0], 0, 100))
+		return (false);
+	if (!parse_uint(&color->g, args[1], 0, 100))
+		return (false);
+	if (!parse_uint(&color->b, args[2], 0, 100))
+		return (false);
+	ft_free_2d((void **)args);
+	return (true);
 }
 
 t_vector	parse_vec3()
