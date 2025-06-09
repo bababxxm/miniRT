@@ -6,11 +6,11 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 22:32:35 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/06/09 23:22:49 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/06/10 01:38:30 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
 void	parse_argument(int argc, char **argv)
 {

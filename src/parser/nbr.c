@@ -6,14 +6,11 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 23:32:42 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/06/10 01:02:30 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/06/10 01:38:57 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-
-int	before_dot(char **str);
-int	after_dot(char **str);
+#include "parser.h"
 
 int	parse_int(int *ptr, char *str, int min, int max)
 {
@@ -106,11 +103,11 @@ int	parse_vec3(t_vector *vec, char *str)
 	args = ft_split(str, ',');
 	if (!args || count_args(args) != 3)
 		return (false);
-	if (!parse_float(&vec->x, args[0], -1000.0, 1000.0))
+	if (!parse_float(&vec->x, args[0], -1.0f, 1.0f))
 		return (false);
-	if (!parse_float(&vec->y, args[1], -1000.0, 1000.0))
+	if (!parse_float(&vec->y, args[1], -1.0f, 1.0f))
 		return (false);
-	if (!parse_float(&vec->z, args[2], -1000.0, 1000.0))
+	if (!parse_float(&vec->z, args[2], -1.0f, 1.0f))
 		return (false);
 	return (true);
 }

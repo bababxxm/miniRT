@@ -6,8 +6,8 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 22:35:34 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/06/09 22:35:40 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/06/10 01:38:33 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"

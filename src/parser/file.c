@@ -6,13 +6,13 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 23:24:19 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/06/10 01:03:14 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/06/10 01:38:36 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "parser.h"
 
-static bool	parse_object(t_rt *minirt, char *line)
+static bool	parse_object(t_scene *scene, char *line)
 {
 	int		idtf;
 	char	**args;
@@ -24,21 +24,21 @@ static bool	parse_object(t_rt *minirt, char *line)
 	if (idtf == UNRECOGNIZED)
 		return (false);
 	else if (idtf == AMBIENT)
-		return (parse_ambient(&minirt->ambient, args));
+		return (parse_ambient(&scene->ambient, args));
 	else if (idtf == CAMERA)
-		return (parse_camera(&minirt->camera, args));
+		return (parse_camera(&scene->camera, args));
 	else if (idtf == LIGHT)
-		return (parse_light(&minirt->light, args));
+		return (parse_light(&scene->light, args));
 	// else if (idtf == SPHERE)
-	// 	return (parse_sphere(&minirt->object, args));
+	// 	return (parse_sphere(&scene->object, args));
 	// else if (idtf == PLANE)
-	// 	return (parse_plane(&minirt->object, args));
+	// 	return (parse_plane(&scene->object, args));
 	// else if (idtf == CYLINDER)
-	// 	return (parse_cylinder(&minirt->object, args));
+	// 	return (parse_cylinder(&scene->object, args));
 	return (true);
 }
 
-static void	read_file(t_rt *minirt, int fd)
+static void	read_file(t_scene *scene, int fd)
 {
 	char	*line;
 	t_list	*read;
@@ -54,7 +54,7 @@ static void	read_file(t_rt *minirt, int fd)
 			free(line);
 			continue ;
 		}
-		if (!parse_object(minirt, line))
+		if (!parse_object(scene, line))
 			ft_perror("Error: invalid format");
 		ft_lstadd_back((void **)&read,
 			ft_lstnew((void *)ft_strdup(line)));
@@ -64,7 +64,7 @@ static void	read_file(t_rt *minirt, int fd)
 
 void	print_fcontent(t_list *read);
 
-void	parse_file(t_rt *minirt, char *title)
+void	parse_file(t_scene *scene, char *title)
 {
 	int	fd;
 
@@ -85,7 +85,7 @@ void	parse_file(t_rt *minirt, char *title)
 	ft_putendl_fd("opening file... [OK]", 1);
 	printf("fd = %d\n", fd);
 
-	read_file(minirt, fd);
+	read_file(scene, fd);
 
 	ft_putendl_fd("reading file...", 1);
 

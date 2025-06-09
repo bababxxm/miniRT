@@ -6,22 +6,22 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:34:44 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/06/09 22:35:28 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/06/10 01:39:15 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static void	parser(t_rt *minirt, int argc, char **argv)
+static void	parser(t_scene *scene, int argc, char **argv)
 {
 	parse_argument(argc, argv);
-	parse_file(minirt, argv[1]);
+	parse_file(scene, argv[1]);
 }
 
 int	main(int argc, char **argv)
 {
-	t_rt	minirt;
+	t_scene	scene;
 
-	parser(&minirt, argc, argv);
+	parser(&scene, argc, argv);
 	return (0);
 }
