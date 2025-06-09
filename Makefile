@@ -6,7 +6,7 @@
 #    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/08 16:45:27 by sklaokli          #+#    #+#              #
-#    Updated: 2025/06/09 00:19:58 by sklaokli         ###   ########.fr        #
+#    Updated: 2025/06/10 00:17:03 by sklaokli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,12 +28,15 @@ MLX			:=	$(MLX_DIR)/build/libmlx42.a
 
 LIB			:=	$(LIBFT) $(MLX)
 
-FILES		:=	\
-				main/main.c \
-				main/utils.c \
+FILES		:=	main/main.c \
 				\
 				parser/file.c \
-				parser/utils.c
+				parser/nbr.c \
+				parser/element.c \
+				parser/object.c \
+				parser/utils.c \
+				\
+				utils/01.c
 
 SRC			:=	$(addprefix $(SRC_DIR)/, $(FILES))
 OBJ			:=	$(addprefix $(OBJ_DIR)/, $(FILES:.c=.o))

@@ -6,11 +6,22 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 20:23:12 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/06/08 23:35:22 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/06/10 01:01:35 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+
+void	ft_perror(char *msg)
+{
+	if (msg)
+	{
+		while (*msg)
+			write(2, msg++, 1);
+		write(2, "\n", 1);
+	}
+	exit(1);
+}
 
 float	ft_atof(char *str)
 {
