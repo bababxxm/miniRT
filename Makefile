@@ -6,7 +6,7 @@
 #    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/08 16:45:27 by sklaokli          #+#    #+#              #
-#    Updated: 2025/06/08 19:59:47 by sklaokli         ###   ########.fr        #
+#    Updated: 2025/06/10 22:09:37 by sklaokli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ $(OBJ_DIR)/%.o:	$(SRC_DIR)/%.c $(DEP)
 all:			$(NAME)
 
 $(NAME):		Makefile $(LIB) $(OBJ)
-				@ $(CC) $(FLAGS) $(LIB) $(OBJ) $(INC) -o $(NAME)
+				@ $(CC) $(WFLAGS) $(OBJ) $(LIB) $(MLXFLAGS) $(INC) -o $(NAME)
 				@ echo "$(GREEN)[OK] $(NAME) built successfully.$(RESET)"
 
 $(LIB):			Makefile

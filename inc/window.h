@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   window.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/08 16:45:36 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/06/10 22:09:58 by sklaokli         ###   ########.fr       */
+/*   Created: 2025/06/10 21:42:43 by sklaokli          #+#    #+#             */
+/*   Updated: 2025/06/10 22:07:54 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef WINDOW_H
+# define WINDOW_H
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdint.h>
-# include <stdio.h>
-# include <math.h>
+# include "MLX42/MLX42.h"
+# include "MLX42/MLX42_Int.h"
 
-# include "libft.h"
-
-# include "object.h"
-# include "window.h"
-
-typedef struct s_scene
-{
-	mlx_t		*window;
-	t_ambient	ambient;
-	t_camera	camera;
-	t_light		light;
-	t_object	*object;
-}	t_scene;
+# define WIDTH 1024
+# define HEIGHT 512
 
 #endif
