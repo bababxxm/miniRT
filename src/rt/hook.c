@@ -1,0 +1,96 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hook.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/17 02:05:31 by sklaokli          #+#    #+#             */
+/*   Updated: 2025/07/21 21:00:00 by sklaokli         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minirt.h"
+
+void	projection(t_scene *scene)
+{
+	int		x;
+	int		y;
+	t_ray	ray;
+	t_rgb	color;
+
+	y = 0;
+	while (y < WINY)
+	{
+		x = 0;
+		while (x < WINX)
+		{
+			ray = generate_ray(x, y, scene->camera);
+			color = trace_ray(ray, scene);
+			mlx_put_pixel(scene->image, x, y, put_pixel(color));
+			x++;
+		}
+		y++;
+	}
+}
+
+void	ray_tracing(void *context)
+{
+	t_scene	*scene;
+
+	scene = (t_scene *)context;
+	if (scene->image)
+	{
+		mlx_delete_image(scene->window, scene->image);
+		scene->image = NULL;
+	}
+	scene->image = mlx_new_image(scene->window, WINX, WINY);
+	setup_camera(scene->camera);
+	projection(scene);
+	mlx_image_to_window(scene->window, scene->image, 0, 0);
+}
+
+void	move_camera(t_scene *scene)
+{
+	if (mlx_is_key_down(scene->window, MLX_KEY_RIGHT))
+		scene->camera->position.x += 0.5;
+	if (mlx_is_key_down(scene->window, MLX_KEY_LEFT))
+		scene->camera->position.x -= 0.5;
+	if (mlx_is_key_down(scene->window, MLX_KEY_UP))
+		scene->camera->position.y += 0.5;
+	if (mlx_is_key_down(scene->window, MLX_KEY_DOWN))
+		scene->camera->position.y -= 0.5;
+	if (mlx_is_key_down(scene->window, MLX_KEY_Z))
+		scene->camera->position.z += 0.5;
+	if (mlx_is_key_down(scene->window, MLX_KEY_X))
+		scene->camera->position.z -= 0.5;
+}
+
+void	adjust_camera_direction(t_scene *scene)
+{
+	if (mlx_is_key_down(scene->window, MLX_KEY_LEFT_SHIFT))
+	{
+		if (mlx_is_key_down(scene->window, MLX_KEY_RIGHT))
+			scene->camera->direction.x += 0.05;
+		if (mlx_is_key_down(scene->window, MLX_KEY_LEFT))
+			scene->camera->direction.x -= 0.05;
+		if (mlx_is_key_down(scene->window, MLX_KEY_UP))
+			scene->camera->direction.y += 0.05;
+		if (mlx_is_key_down(scene->window, MLX_KEY_DOWN))
+			scene->camera->direction.y -= 0.05;
+	}
+}
+
+void	keybinds(mlx_key_data_t k, void *context)
+{
+	t_scene	*scene;
+
+	(void)k;
+	scene = (t_scene *)context;
+	move_camera(scene);
+	adjust_camera_direction(scene);
+	if (mlx_is_key_down(scene->window, MLX_KEY_ESCAPE))
+		mlx_close_window(scene->window);
+	if (mlx_is_key_down(scene->window, MLX_KEY_Q))
+		mlx_close_window(scene->window);
+}
