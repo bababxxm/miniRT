@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 22:35:34 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/17 05:07:48 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/07/28 20:09:51 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,16 @@ bool	parse_sphere(t_object **object, char **args)
 	t_sphere	*sphere;
 
 	if (!args || count_args(args) != 4)
-		return (false);
+		return (broadcast("invalid sphere arguments"));
 	sphere = gct_malloc(sizeof(t_sphere));
 	sphere->type = identify_object(args[0]);
 	sphere->next = NULL;
-	if (!parse_vec3(&sphere->center, args[1], -100.0f, 100.0f)
-		|| !parse_float(&sphere->radius, args[2], 0.0f, 1000.0f)
-		|| !parse_rgb(&sphere->color, args[3]))
-		return (false);
+	if (!parse_vec3(&sphere->center, args[1], -100.0f, 100.0f))
+		return (broadcast("invalid sphere center"));
+	if (!parse_float(&sphere->radius, args[2], 0.0f, 1000.0f))
+		return (broadcast("invalid sphere radius"));
+	if (!parse_rgb(&sphere->color, args[3]))
+		return (broadcast("invalid sphere color"));
 	add_new_object(object, (t_object *)sphere);
 	return (true);
 }
@@ -39,14 +41,16 @@ bool	parse_plane(t_object **object, char **args)
 	t_plane	*plane;
 
 	if (!args || count_args(args) != 4)
-		return (false);
+		return (broadcast("invalid plane arguments"));
 	plane = gct_malloc(sizeof(t_plane));
 	plane->type = identify_object(args[0]);
 	plane->next = NULL;
-	if (!parse_vec3(&plane->position, args[1], -100.0f, 100.0f)
-		|| !parse_vec3(&plane->normal, args[2], -1.0f, 1.0f)
-		|| !parse_rgb(&plane->color, args[3]))
-		return (false);
+	if (!parse_vec3(&plane->position, args[1], -100.0f, 100.0f))
+		return (broadcast("invalid plane position"));
+	if (!parse_vec3(&plane->normal, args[2], -1.0f, 1.0f))
+		return (broadcast("invalid plane normal"));
+	if (!parse_rgb(&plane->color, args[3]))
+		return (broadcast("invalid plane color"));
 	add_new_object(object, (t_object *)plane);
 	return (true);
 }
@@ -56,16 +60,20 @@ bool	parse_cylinder(t_object **object, char **args)
 	t_cylinder	*cylinder;
 
 	if (!args || count_args(args) != 6)
-		return (false);
+		return (broadcast("invalid cylinder arguments"));
 	cylinder = gct_malloc(sizeof(t_cylinder));
 	cylinder->type = identify_object(args[0]);
 	cylinder->next = NULL;
-	if (!parse_vec3(&cylinder->center, args[1], -100.0f, 100.0f)
-		|| !parse_vec3(&cylinder->axis, args[2], -1.0f, 1.0f)
-		|| !parse_float(&cylinder->radius, args[3], 0.0f, 1000.0f)
-		|| !parse_float(&cylinder->height, args[4], 0.0f, 1000.0f)
-		|| !parse_rgb(&cylinder->color, args[5]))
-		return (false);
+	if (!parse_vec3(&cylinder->center, args[1], -100.0f, 100.0f))
+		return (broadcast("invalid cylinder center"));
+	if (!parse_vec3(&cylinder->axis, args[2], -1.0f, 1.0f))
+		return (broadcast("invalid cylinder axis"));
+	if (!parse_float(&cylinder->radius, args[3], 0.0f, 1000.0f))
+		return (broadcast("invalid cylinder radius"));
+	if (!parse_float(&cylinder->height, args[4], 0.0f, 1000.0f))
+		return (broadcast("invalid cylinder height"));
+	if (!parse_rgb(&cylinder->color, args[5]))
+		return (broadcast("invalid cylinder color"));
 	add_new_object(object, (t_object *)cylinder);
 	return (true);
 }

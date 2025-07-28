@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 01:57:45 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/17 02:37:34 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/07/28 20:00:23 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,7 @@ int			count_args(char **args);
 void		display_float(char *text, float f);
 void		display_color(char *text, t_rgb color);
 void		display_vector(char *text, t_vector v);
+
+bool		broadcast(char *msg);
 
 #endif

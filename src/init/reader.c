@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fd.c                                               :+:      :+:    :+:   */
+/*   reader.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 23:24:19 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/17 02:02:15 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/07/28 22:27:25 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static bool	parse_object(char *line, t_scene *scene)
 		return (false);
 	type = identify_object(args[0]);
 	if (type == UNKNOWN)
-		return (false);
+		return (broadcast("unrecognized token"));
 	else if (type == AMBIENT)
 		return (parse_ambient(scene->ambient, args));
 	else if (type == CAMERA)

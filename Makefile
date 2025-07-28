@@ -6,7 +6,7 @@
 #    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/08 16:45:27 by sklaokli          #+#    #+#              #
-#    Updated: 2025/07/17 21:40:08 by sklaokli         ###   ########.fr        #
+#    Updated: 2025/07/24 21:00:10 by sklaokli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,7 @@ $(BIN_DIR)/%.o:	$(SRC_DIR)/%.c $(DEP)
 all:			$(NAME)
 
 $(NAME):		Makefile $(LIB) $(BIN)
-				@ $(CC) $(FLAGS) $(BIN) $(LIB) $(INC) -o $(NAME)
+				@ $(CC) $(BIN) $(LIB) $(INC) -o $(NAME) $(FLAGS)
 				@ echo "$(GREEN)[OK] $(NAME) built successfully.$(RESET)"
 
 $(LIB):			Makefile
@@ -100,7 +100,7 @@ $(LIB):			Makefile
 clean:			Makefile
 				@ $(MAKE) -sC $(LIBFT_DIR) clean
 				@ $(RM) -r $(BIN_DIR)
-				@ echo "$(CYAN)$(NAME) BINect files cleaned.$(RESET)"
+				@ echo "$(CYAN)$(NAME) object files cleaned.$(RESET)"
 
 fclean: 		Makefile clean
 				@ $(MAKE) -sC $(LIBFT_DIR) fclean

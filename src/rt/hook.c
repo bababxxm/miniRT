@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 02:05:31 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/21 21:00:00 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/07/28 22:36:32 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	ray_tracing(void *context)
 	scene = (t_scene *)context;
 	if (scene->image)
 	{
-		mlx_delete_image(scene->window, scene->image);
-		scene->image = NULL;
+		mlx_image_to_window(scene->window, scene->image, 0, 0);
+		return ;
 	}
 	scene->image = mlx_new_image(scene->window, WINX, WINY);
 	setup_camera(scene->camera);
@@ -85,8 +85,12 @@ void	keybinds(mlx_key_data_t k, void *context)
 {
 	t_scene	*scene;
 
-	(void)k;
 	scene = (t_scene *)context;
+	if (k.action == MLX_PRESS)
+	{
+		mlx_delete_image(scene->window, scene->image);
+		scene->image = NULL;
+	}
 	move_camera(scene);
 	adjust_camera_direction(scene);
 	if (mlx_is_key_down(scene->window, MLX_KEY_ESCAPE))

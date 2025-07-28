@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:34:44 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/17 22:04:24 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/07/28 19:52:51 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 		clear_scene("Error: invalid arguments", FAILURE);
 	init_scene(scene);
 	if (!read_scene(argv[1], scene))
-		clear_scene("Error: invalid format", FAILURE);
+		clear_scene(NULL, FAILURE);
 	display_info(scene);
 	render_scene(scene);
 	close_scene(scene, SUCCESS);
