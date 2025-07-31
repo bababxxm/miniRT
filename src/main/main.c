@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:34:44 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/28 19:52:51 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/01 01:01:03 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void	init_scene(t_scene *scene)
 	scene->object = NULL;
 	scene->light = NULL;
 	scene->image = NULL;
-	scene->ambient = gct_malloc(sizeof(t_ambient));
-	scene->camera = gct_malloc(sizeof(t_camera));
+	scene->ambient = NULL;
+	scene->camera = NULL;
 }
 
 static void	render_scene(t_scene *scene)
@@ -40,7 +40,7 @@ int	main(int argc, char **argv)
 
 	scene = gct_malloc(sizeof(t_scene));
 	if (!parse_args(argc, argv))
-		clear_scene("Error: invalid arguments", FAILURE);
+		clear_scene(ERR_FILE_INVALID, FAILURE);
 	init_scene(scene);
 	if (!read_scene(argv[1], scene))
 		clear_scene(NULL, FAILURE);

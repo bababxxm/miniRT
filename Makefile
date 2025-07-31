@@ -6,11 +6,11 @@
 #    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/08 16:45:27 by sklaokli          #+#    #+#              #
-#    Updated: 2025/07/24 21:00:10 by sklaokli         ###   ########.fr        #
+#    Updated: 2025/08/01 01:07:44 by sklaokli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	miniRT
+NAME		:=	minirt
 
 SRC_DIR		:=	src
 BIN_DIR		:=	bin
@@ -76,6 +76,7 @@ WFLAGS		:=	-Wall -Wextra -Wextra -Ofast
 MLXFLAGS	:=	-ldl -lglfw -pthread -lm
 LFLAGS		:=	--leak-check=full --show-leak-kinds=all
 FDFLAGS		:=	--track-fds=yes --trace-children=yes
+VFLAGS		:=	$(LFLAGS) $(FDFLAGS)
 
 FLAGS		:=	$(WFLAGS) $(MLXFLAGS) 
 
@@ -110,7 +111,7 @@ fclean: 		Makefile clean
 
 re:				Makefile fclean all
 
-leaks:			Makefile $(NAME)
-				@ valgrind $(LFLAGS) ./$(NAME)
+valgrind:		Makefile $(NAME)
+				@ valgrind $(VFLAGS) ./$(NAME) scene/basic.rt
 
-.PHONY:			all clean fclean re leaks
+.PHONY:			all clean fclean re valgrind

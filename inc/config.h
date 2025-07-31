@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 01:57:45 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/28 20:00:23 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/01 00:52:10 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,13 @@ typedef struct s_ray		t_ray;
 typedef struct s_hit		t_hit;
 typedef struct s_scene		t_scene;
 
-int			open_fd(char *path, char *extension, int o_flags);
-t_content	*read_fd(int fd);
-void		clear_content(t_content *content);
-
 bool		parse_int(int *ptr, char *str, int min, int max);
 bool		parse_float(float *ptr, char *str, float min, float max);
 bool		parse_rgb(t_rgb *color, char *str);
 bool		parse_vec3(t_vector *vec, char *str, float min, float max);
 
-bool		parse_ambient(t_ambient *ambient, char **args);
-bool		parse_camera(t_camera *camera, char **args);
+bool		parse_ambient(t_ambient **ambient, char **args);
+bool		parse_camera(t_camera **camera, char **args);
 bool		parse_light(t_light **light, char **args);
 bool		parse_sphere(t_object **object, char **args);
 bool		parse_plane(t_object **object, char **args);
@@ -64,6 +60,9 @@ void		display_float(char *text, float f);
 void		display_color(char *text, t_rgb color);
 void		display_vector(char *text, t_vector v);
 
-bool		broadcast(char *msg);
+bool		broadcast(char *msg1, char *msg2);
+int			open_fd(char *path, char *extension, int o_flags);
+t_content	*read_fd(int fd);
+void		clear_content(t_content *content);
 
 #endif

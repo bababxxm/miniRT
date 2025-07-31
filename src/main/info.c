@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:41:28 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/17 05:07:48 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/07/31 23:28:49 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,60 +16,83 @@ static void	display_element(t_scene *scene)
 {
 	if (scene->ambient)
 	{
-		display_float("ambient->ratio", scene->ambient->ratio);
-		display_color("ambient->color", scene->ambient->color);
+		printf("Ambient Light:\n");
+		display_float("    Ratio", scene->ambient->ratio);
+		display_color("    Color", scene->ambient->color);
+		printf("\n");
 	}
 	if (scene->camera)
 	{
-		display_vector("camera->position", scene->camera->position);
-		display_vector("camera->direction", scene->camera->direction);
-		display_float("camera->fov", scene->camera->fov);
+		printf("Camera:\n");
+		display_vector("    Position", scene->camera->position);
+		display_vector("    Direction", scene->camera->direction);
+		display_float("    FOV", scene->camera->fov);
+		printf("\n");
 	}
 	if (scene->light)
 	{
-		display_vector("light->positon", scene->light->positon);
-		display_float("light->brightness", scene->light->brightness);
-		display_color("light->color", scene->light->color);
+		printf("Light:\n");
+		display_vector("    Position", scene->light->positon);
+		display_float("    Brightness", scene->light->brightness);
+		display_color("    Color", scene->light->color);
+		printf("\n");
 	}
 }
 
-static void	display_sphere(t_sphere *sphere)
+static void	display_sphere(t_sphere *sphere, int id)
 {
-	display_vector("sphere->center", sphere->center);
-	display_float("sphere->radius", sphere->radius);
-	display_color("sphere->color", sphere->color);
+	if (id == 1)
+		printf("Sphere(s):\n");
+	printf("    [%d]\n", id);
+	display_vector("    Center", sphere->center);
+	display_float("    Radius", sphere->radius);
+	display_color("    Color", sphere->color);
 }
 
-static void	display_plane(t_plane *plane)
+static void	display_plane(t_plane *plane, int id)
 {
-	display_vector("plane->position", plane->position);
-	display_vector("plane->normal", plane->normal);
-	display_color("plane->color", plane->color);
+	if (id == 1)
+		printf("Plane(s):\n");
+	printf("    [%d]\n", id);
+	display_vector("    Position", plane->position);
+	display_vector("    Normal", plane->normal);
+	display_color("    Color", plane->color);
+	printf("\n");
 }
 
-static void	display_cylinder(t_cylinder *cylinder)
+static void	display_cylinder(t_cylinder *cylinder, int id)
 {
-	display_vector("cylinder->center", cylinder->center);
-	display_vector("cylinder->axis", cylinder->axis);
-	display_float("cylinder->radius", cylinder->radius);
-	display_float("cylinder->height", cylinder->height);
-	display_color("cylinder->color", cylinder->color);
+	if (id == 1)
+		printf("Cylinder(s):\n");
+	printf("    [%d]\n", id);
+	display_vector("    Center", cylinder->center);
+	display_vector("    Axis", cylinder->axis);
+	display_float("    Radius", cylinder->radius);
+	display_float("    Height", cylinder->height);
+	display_color("    Color", cylinder->color);
+	printf("\n");
 }
 
 void	display_info(t_scene *scene)
 {
+	int			sphere;
+	int			plane;
+	int			cylinder;
 	t_object	*object;
 
+	sphere = 1;
+	plane = 1;
+	cylinder = 1;
 	display_element(scene);
 	object = scene->object;
 	while (object)
 	{
 		if (object->type == SPHERE)
-			display_sphere((t_sphere *)object);
+			display_sphere((t_sphere *)object, sphere++);
 		else if (object->type == PLANE)
-			display_plane((t_plane *)object);
+			display_plane((t_plane *)object, plane++);
 		else if (object->type == CYLINDER)
-			display_cylinder((t_cylinder *)object);
+			display_cylinder((t_cylinder *)object, cylinder++);
 		object = object->next;
 	}
 }

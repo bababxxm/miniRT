@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 18:40:18 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/17 02:02:15 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/01 00:23:40 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	open_fd(char *path, char *extension, int o_flags)
 
 	fd = open(path, o_flags);
 	if (fd == -1)
-		return (-1);
+		return (broadcast(ERR_FILE_NOT_FOUND, NULL), -1);
 	while (*path && *path != '.')
 		path++;
 	if (ft_strcmp(path, extension))
-		return (-1);
+		return (broadcast(ERR_FILE_EXTENSION, NULL), -1);
 	return (fd);
 }
 

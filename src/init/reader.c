@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 23:24:19 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/28 22:27:25 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/01 00:59:08 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ static bool	parse_object(char *line, t_scene *scene)
 		return (false);
 	type = identify_object(args[0]);
 	if (type == UNKNOWN)
-		return (broadcast("unrecognized token"));
+		return (broadcast(ERR_ELEMENT_UNKNOWN, NULL));
 	else if (type == AMBIENT)
-		return (parse_ambient(scene->ambient, args));
+		return (parse_ambient(&scene->ambient, args));
 	else if (type == CAMERA)
-		return (parse_camera(scene->camera, args));
+		return (parse_camera(&scene->camera, args));
 	else if (type == LIGHT)
 		return (parse_light(&scene->light, args));
 	else if (type == SPHERE)
@@ -57,6 +57,7 @@ bool	read_scene(char *path, t_scene *scene)
 	file = read_fd(fd);
 	if (!file)
 		return (false);
+	close(fd);
 	ptr = file;
 	while (file)
 	{
@@ -68,6 +69,7 @@ bool	read_scene(char *path, t_scene *scene)
 		file = file->next;
 	}
 	clear_content(ptr);
-	close(fd);
+	if (!scene->ambient || !scene->camera || !scene->light)
+		return (broadcast(ERR_ELEMENT_MISSING, NULL));
 	return (true);
 }

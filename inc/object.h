@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 00:50:00 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/17 05:08:14 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/07/31 22:28:36 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@ typedef struct s_plane
 	t_vector			normal;
 	t_rgb				color;
 }	t_plane;
+
+typedef struct s_cap
+{
+	float		radius;
+	t_rgb		color;
+	t_vector	axis;
+	t_vector	center;
+	bool		hit;
+}	t_cap;
 
 typedef struct s_cylinder
 {

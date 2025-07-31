@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 16:45:36 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/24 20:32:31 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/07/31 23:37:02 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@
 # include "element.h"
 # include "object.h"
 # include "render.h"
+# include "error.h"
 
 # define WINX 2048
 # define WINY 1024
 
-#define EPSILON 1e-6
+# define EPSILON 1e-2
 
 typedef enum e_type
 {

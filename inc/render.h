@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:35:30 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/17 02:48:25 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/01 01:11:53 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ t_rgb		compute_ambient(t_rgb hit, t_ambient *ambient);
 t_rgb		compute_diffuse(t_hit *hit, t_light *light);
 t_vector	compute_light(t_light *light, t_vector point);
 float		quadratic_equation(float a, float b, float c, t_hit *hit);
+bool		object_hit(t_ray ray, t_object *object, t_hit *hit);
 bool		is_in_shadow(t_vector point, t_light *light, t_scene *scene);
 
 void		setup_camera(t_camera *camera);
@@ -58,5 +59,9 @@ t_rgb		trace_ray(t_ray ray, t_scene *scene);
 bool		hit_plane(t_ray ray, t_plane *plane, t_hit *hit);
 bool		hit_sphere(t_ray ray, t_sphere *sphere, t_hit *hit);
 bool		hit_cylinder(t_ray ray, t_cylinder *cylinder, t_hit *hit);
+
+t_cap		create_cap(t_cylinder *cylinder, t_vector axis, t_vector center);
+bool		intersect_plane(t_ray ray, t_vector normal,
+				t_vector point, float *t);
 
 #endif

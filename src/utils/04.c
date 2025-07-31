@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 18:45:49 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/28 20:01:47 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/01 00:16:36 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,17 @@ float	vec3_length(t_vector u)
 	return (sqrtf((u.x * u.x) + (u.y * u.y) + (u.z * u.z)));
 }
 
-bool	broadcast(char *msg)
+bool	broadcast(char *msg1, char *msg2)
 {
-	ft_putstr_fd("Error: ", 2);
-	ft_putendl_fd(msg, 2);
+	if (msg1 && msg2)
+	{
+		ft_putstr_fd(msg1, 2);
+		ft_putstr_fd(" ", 2);
+		ft_putendl_fd(msg2, 2);
+	}
+	else if (msg1)
+		ft_putendl_fd(msg1, 2);
+	else if (msg2)
+		ft_putendl_fd(msg2, 2);
 	return (false);
 }

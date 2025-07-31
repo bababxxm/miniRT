@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 02:05:31 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/28 22:36:32 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/07/31 17:51:52 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,12 @@ void	ray_tracing(void *context)
 	t_scene	*scene;
 
 	scene = (t_scene *)context;
-	if (scene->image)
+	if (!scene->image)
 	{
-		mlx_image_to_window(scene->window, scene->image, 0, 0);
-		return ;
+		scene->image = mlx_new_image(scene->window, WINX, WINY);
+		setup_camera(scene->camera);
+		projection(scene);
 	}
-	scene->image = mlx_new_image(scene->window, WINX, WINY);
-	setup_camera(scene->camera);
-	projection(scene);
 	mlx_image_to_window(scene->window, scene->image, 0, 0);
 }
 

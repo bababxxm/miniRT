@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 02:10:00 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/25 17:01:54 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/07/31 21:49:38 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	setup_camera(t_camera *camera)
 	right = vec3(0, -1, 0);
 	camera->direction = vec3_normalize(camera->direction);
 	right = vec3_cross(camera->direction, right);
-	if (vec3_length(right) < 1e-6)
+	if (vec3_length(right) < EPSILON)
 		right = vec3_cross(camera->direction, up);
 	camera->right = vec3_normalize(right);
 	up = vec3_cross(camera->right, camera->direction);

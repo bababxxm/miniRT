@@ -6,13 +6,13 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 02:11:21 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/24 20:31:06 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/07/31 21:46:11 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static bool	object_hit(t_ray ray, t_object *object, t_hit *hit)
+bool	object_hit(t_ray ray, t_object *object, t_hit *hit)
 {
 	if (object->type == PLANE)
 		return (hit_plane(ray, (t_plane *)object, hit));

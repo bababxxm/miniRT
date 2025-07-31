@@ -6,41 +6,47 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 00:12:35 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/28 20:17:02 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/01 00:51:52 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-bool	parse_ambient(t_ambient *ambient, char **args)
+bool	parse_ambient(t_ambient **ambient, char **args)
 {
 	static int	occur = 0;
 
 	occur++;
-	if (occur > 1 || count_args(args) != 3)
-		return (broadcast("invalid ambient arguments"));
-	ambient->type = identify_object(args[0]);
-	if (!parse_float(&ambient->ratio, args[1], 0.0f, 1.0f))
-		return (broadcast("invalid ambient ratio"));
-	if (!parse_rgb(&ambient->color, args[2]))
-		return (broadcast("invalid ambient color"));
+	if (occur > 1)
+		return (broadcast(ERR_ELEMENT_DUPLICATE, NULL));
+	if (count_args(args) != 3)
+		return (broadcast(ERR_AMBIENT_ARGS, NULL));
+	*ambient = gct_malloc(sizeof(t_ambient));
+	(*ambient)->type = identify_object(args[0]);
+	if (!parse_float(&(*ambient)->ratio, args[1], 0.0f, 1.0f))
+		return (broadcast(ERR_AMBIENT_RATIO, NULL));
+	if (!parse_rgb(&(*ambient)->color, args[2]))
+		return (broadcast(ERR_AMBIENT_COLOR, ERR_RGB_FORMAT));
 	return (true);
 }
 
-bool	parse_camera(t_camera *camera, char **args)
+bool	parse_camera(t_camera **camera, char **args)
 {
 	static int	occur = 0;
 
 	occur++;
-	if (occur > 1 || count_args(args) != 4)
-		return (broadcast("invalid camera arguments"));
-	camera->type = identify_object(args[0]);
-	if (!parse_vec3(&camera->position, args[1], -100.0f, 100.0f))
-		return (broadcast("invalid camera position"));
-	if (!parse_vec3(&camera->direction, args[2], -1.0f, 1.0f))
-		return (broadcast("invalid camera direction"));
-	if (!parse_int((int *)&camera->fov, args[3], 0, 360))
-		return (broadcast("invalid camera fov"));
+	if (occur > 1)
+		return (broadcast(ERR_ELEMENT_DUPLICATE, NULL));
+	if (count_args(args) != 4)
+		return (broadcast(ERR_CAMERA_ARGS, NULL));
+	*camera = gct_malloc(sizeof(t_camera));
+	(*camera)->type = identify_object(args[0]);
+	if (!parse_vec3(&(*camera)->position, args[1], -100.0f, 100.0f))
+		return (broadcast(ERR_CAMERA_POSITION, NULL));
+	if (!parse_vec3(&(*camera)->direction, args[2], -1.0f, 1.0f))
+		return (broadcast(ERR_CAMERA_DIRECTION, NULL));
+	if (!parse_int(&(*camera)->fov, args[3], 0, 360))
+		return (broadcast(ERR_CAMERA_FOV, NULL));
 	return (true);
 }
 
@@ -54,16 +60,16 @@ bool	parse_light(t_light **light, char **args)
 	t_light	*new;
 
 	if (count_args(args) != 4)
-		return (broadcast("invalid light arguments"));
+		return (broadcast(ERR_LIGHT_ARGS, NULL));
 	new = gct_malloc(sizeof(t_light));
 	new->type = identify_object(args[0]);
 	new->next = NULL;
 	if (!parse_vec3(&new->positon, args[1], -100.0f, 100.0f))
-		return (broadcast("invalid light position"));
+		return (broadcast(ERR_LIGHT_POSITION, NULL));
 	if (!parse_float(&new->brightness, args[2], 0.0f, 1.0f))
-		return (broadcast("invalid light brightness"));
+		return (broadcast(ERR_LIGHT_BRIGHTNESS, NULL));
 	if (!parse_rgb(&new->color, args[3]))
-		return (broadcast("invalid light color"));
+		return (broadcast(ERR_LIGHT_COLOR, ERR_RGB_FORMAT));
 	add_new_light(light, new);
 	return (true);
 }
