@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:41:28 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/31 23:28:49 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/01 01:19:30 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static void	display_sphere(t_sphere *sphere, int id)
 	display_vector("    Center", sphere->center);
 	display_float("    Radius", sphere->radius);
 	display_color("    Color", sphere->color);
+	printf("\n");
 }
 
 static void	display_plane(t_plane *plane, int id)
