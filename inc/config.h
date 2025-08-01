@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 01:57:45 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/01 00:52:10 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/01 23:34:06 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ bool		parse_float(float *ptr, char *str, float min, float max);
 bool		parse_rgb(t_rgb *color, char *str);
 bool		parse_vec3(t_vector *vec, char *str, float min, float max);
 
-bool		parse_ambient(t_ambient **ambient, char **args);
-bool		parse_camera(t_camera **camera, char **args);
-bool		parse_light(t_light **light, char **args);
-bool		parse_sphere(t_object **object, char **args);
-bool		parse_plane(t_object **object, char **args);
-bool		parse_cylinder(t_object **object, char **args);
+bool		parse_ambient(t_scene *scene, char **args);
+bool		parse_camera(t_scene *scene, char **args);
+bool		parse_light(t_scene *scene, char **args);
+bool		parse_sphere(t_scene *scene, char **args);
+bool		parse_plane(t_scene *scene, char **args);
+bool		parse_cylinder(t_scene *scene, char **args);
 
 int			before_dot(char **str);
 int			after_dot(char **str);

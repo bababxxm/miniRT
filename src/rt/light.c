@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 02:11:57 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/31 21:48:16 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/01 22:55:47 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ t_rgb	compute_diffuse(t_hit *hit, t_light *light)
 	float		intensity;
 	t_vector	direction;
 
-	direction = compute_light(light, hit->point);
+	direction = vec3_sub(light->positon, hit->point);
+	direction = vec3_normalize(direction);
 	dot = vec3_dot(hit->normalized, direction);
 	if (dot < 0)
 		dot = 0;
@@ -46,12 +47,4 @@ t_rgb	compute_diffuse(t_hit *hit, t_light *light)
 	color.g = hit->color.g * light->color.g / 255.0f * intensity;
 	color.b = hit->color.b * light->color.b / 255.0f * intensity;
 	return (color);
-}
-
-t_vector	compute_light(t_light *light, t_vector point)
-{
-	t_vector	direction;
-
-	direction = vec3_sub(light->positon, point);
-	return (vec3_normalize(direction));
 }

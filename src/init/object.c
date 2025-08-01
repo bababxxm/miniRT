@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 22:35:34 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/01 01:00:12 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/01 23:25:32 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	add_new_object(t_object **object, t_object *new)
 	ft_lstadd_back((void **)object, (void *)new);
 }
 
-bool	parse_sphere(t_object **object, char **args)
+bool	parse_sphere(t_scene *scene, char **args)
 {
 	t_sphere	*sphere;
 
@@ -32,11 +32,11 @@ bool	parse_sphere(t_object **object, char **args)
 		return (broadcast(ERR_SPHERE_RADIUS, NULL));
 	if (!parse_rgb(&sphere->color, args[3]))
 		return (broadcast(ERR_SPHERE_COLOR, ERR_RGB_FORMAT));
-	add_new_object(object, (t_object *)sphere);
+	add_new_object(&scene->object, (t_object *)sphere);
 	return (true);
 }
 
-bool	parse_plane(t_object **object, char **args)
+bool	parse_plane(t_scene *scene, char **args)
 {
 	t_plane	*plane;
 
@@ -51,11 +51,11 @@ bool	parse_plane(t_object **object, char **args)
 		return (broadcast(ERR_PLANE_NORMAL, NULL));
 	if (!parse_rgb(&plane->color, args[3]))
 		return (broadcast(ERR_PLANE_COLOR, ERR_RGB_FORMAT));
-	add_new_object(object, (t_object *)plane);
+	add_new_object(&scene->object, (t_object *)plane);
 	return (true);
 }
 
-bool	parse_cylinder(t_object **object, char **args)
+bool	parse_cylinder(t_scene *scene, char **args)
 {
 	t_cylinder	*cylinder;
 
@@ -74,6 +74,6 @@ bool	parse_cylinder(t_object **object, char **args)
 		return (broadcast(ERR_CYLINDER_HEIGHT, NULL));
 	if (!parse_rgb(&cylinder->color, args[5]))
 		return (broadcast(ERR_CYLINDER_COLOR, ERR_RGB_FORMAT));
-	add_new_object(object, (t_object *)cylinder);
+	add_new_object(&scene->object, (t_object *)cylinder);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 23:24:19 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/01 00:59:08 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/01 23:26:30 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ static bool	parse_object(char *line, t_scene *scene)
 	if (type == UNKNOWN)
 		return (broadcast(ERR_ELEMENT_UNKNOWN, NULL));
 	else if (type == AMBIENT)
-		return (parse_ambient(&scene->ambient, args));
+		return (parse_ambient(scene, args));
 	else if (type == CAMERA)
-		return (parse_camera(&scene->camera, args));
+		return (parse_camera(scene, args));
 	else if (type == LIGHT)
-		return (parse_light(&scene->light, args));
+		return (parse_light(scene, args));
 	else if (type == SPHERE)
-		return (parse_sphere(&scene->object, args));
+		return (parse_sphere(scene, args));
 	else if (type == PLANE)
-		return (parse_plane(&scene->object, args));
+		return (parse_plane(scene, args));
 	else if (type == CYLINDER)
-		return (parse_cylinder(&scene->object, args));
+		return (parse_cylinder(scene, args));
 	return (true);
 }
 

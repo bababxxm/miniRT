@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:35:30 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/01 01:11:53 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/01 23:34:52 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ t_vector	vec3_cross(t_vector u, t_vector v);
 t_rgb		clamp(t_rgb color);
 t_rgb		compute_ambient(t_rgb hit, t_ambient *ambient);
 t_rgb		compute_diffuse(t_hit *hit, t_light *light);
-t_vector	compute_light(t_light *light, t_vector point);
 float		quadratic_equation(float a, float b, float c, t_hit *hit);
 bool		object_hit(t_ray ray, t_object *object, t_hit *hit);
 bool		is_in_shadow(t_vector point, t_light *light, t_scene *scene);
