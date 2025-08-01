@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:35:30 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/01 23:34:52 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/02 01:16:31 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ typedef struct s_ray
 
 typedef struct s_hit
 {
-	float			t;
-	t_vector		point;
-	t_vector		normalized;
-	t_rgb			color;
-	bool			found;
+	float		t;
+	t_vector	point;
+	t_vector	normalized;
+	t_rgb		color;
+	bool		found;
 }	t_hit;
 
 float		square(float x);
