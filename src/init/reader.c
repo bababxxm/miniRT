@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 23:24:19 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/01 23:26:30 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/02 21:41:56 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,37 +38,22 @@ static bool	parse_object(char *line, t_scene *scene)
 	return (true);
 }
 
-static bool	skip_line(char *line)
+bool	parse_scene(t_file *file, t_scene *scene)
 {
-	if (*line == '#' || *line == '\n')
-		return (true);
-	return (false);
-}
+	char	*line;
+	t_list	*lines;
 
-bool	read_scene(char *path, t_scene *scene)
-{
-	int			fd;
-	void		*ptr;
-	t_content	*file;
-
-	fd = open_fd(path, ".rt", O_RDONLY);
-	if (fd == -1)
-		return (false);
-	file = read_fd(fd);
-	if (!file)
-		return (false);
-	close(fd);
-	ptr = file;
-	while (file)
+	lines = file->content;
+	while (lines)
 	{
-		if (!skip_line(file->line))
+		line = (char *)lines->content;
+		if (*line != '#' && *line != '\n')
 		{
-			if (!parse_object(file->line, scene))
-				return (clear_content(ptr), false);
+			if (!parse_object(line, scene))
+				return (false);
 		}
-		file = file->next;
+		lines = lines->next;
 	}
-	clear_content(ptr);
 	if (!scene->ambient || !scene->camera || !scene->light)
 		return (broadcast(ERR_ELEMENT_MISSING, NULL));
 	return (true);

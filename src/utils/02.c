@@ -1,44 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02.c                                               :+:      :+:    :+:   */
+/*   03.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/05 15:09:53 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/31 23:26:36 by sklaokli         ###   ########.fr       */
+/*   Created: 2025/07/05 18:45:24 by sklaokli          #+#    #+#             */
+/*   Updated: 2025/07/15 20:18:22 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	display_float(char *text, float f)
+float	vec3_dot(t_vector u, t_vector v)
 {
-	printf("%s: %.2f\n", text, f);
+	return ((u.x * v.x) + (u.y * v.y) + (u.z * v.z));
 }
 
-void	display_color(char *text, t_rgb color)
+t_vector	vec3_add(t_vector u, t_vector v)
 {
-	printf("%s: %u, %u, %u\n", text, color.r, color.g, color.b);
+	t_vector	vec3;
+
+	vec3.x = u.x + v.x;
+	vec3.y = u.y + v.y;
+	vec3.z = u.z + v.z;
+	return (vec3);
 }
 
-void	display_vector(char *text, t_vector v)
+t_vector	vec3_sub(t_vector u, t_vector v)
 {
-	printf("%s: %.2f, %.2f, %.2f\n", text, v.x, v.y, v.z);
+	t_vector	vec3;
+
+	vec3.x = u.x - v.x;
+	vec3.y = u.y - v.y;
+	vec3.z = u.z - v.z;
+	return (vec3);
 }
 
-void	close_scene(t_scene *scene, int status)
+t_vector	vec3_mul(t_vector u, float f)
 {
-	if (scene->window && status)
-	{
-		puts(mlx_strerror(mlx_errno));
-		mlx_close_window(scene->window);
-	}
-	clear_scene("miniRT closed", status);
+	t_vector	vec3;
+
+	vec3.x = u.x * f;
+	vec3.y = u.y * f;
+	vec3.z = u.z * f;
+	return (vec3);
 }
 
-void	clear_scene(char *msg, int exitcode)
+t_vector	vec3_normalize(t_vector v)
 {
-	gct_cleanup();
-	ft_exit(msg, exitcode);
+	float	f;
+
+	f = sqrtf(vec3_dot(v, v));
+	v.x = v.x / f;
+	v.y = v.y / f;
+	v.z = v.z / f;
+	return (v);
 }

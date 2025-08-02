@@ -6,7 +6,7 @@
 #    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 19:44:55 by sklaokli          #+#    #+#              #
-#    Updated: 2025/07/02 01:27:04 by sklaokli         ###   ########.fr        #
+#    Updated: 2025/08/02 21:07:33 by sklaokli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,11 @@ FILES		:=	\
 				fd/ft_putstr_fd.c \
 				fd/ft_putendl_fd.c \
 				fd/ft_putnbr_fd.c \
-				fd/get_content_fd.c \
+				fd/open_fd.c \
+				\
+				file/open_file.c \
+				file/read_file.c \
+				file/close_file.c \
 				\
 				lst/ft_lstnew.c \
 				lst/ft_lstsize.c \

@@ -6,7 +6,7 @@
 #    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/08 16:45:27 by sklaokli          #+#    #+#              #
-#    Updated: 2025/08/01 01:07:44 by sklaokli         ###   ########.fr        #
+#    Updated: 2025/08/02 21:43:00 by sklaokli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,8 +52,7 @@ FILES		:=	main/main.c \
 				utils/02.c \
 				utils/03.c \
 				utils/04.c \
-				utils/05.c \
-				utils/06.c
+				utils/05.c
 
 SRC			:=	$(addprefix $(SRC_DIR)/, $(FILES))
 BIN			:=	$(addprefix $(BIN_DIR)/, $(FILES:.c=.o))

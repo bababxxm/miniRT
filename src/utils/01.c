@@ -1,73 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   01.c                                               :+:      :+:    :+:   */
+/*   02.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/05 18:40:18 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/01 00:23:40 by sklaokli         ###   ########.fr       */
+/*   Created: 2025/07/05 15:09:53 by sklaokli          #+#    #+#             */
+/*   Updated: 2025/07/31 23:26:36 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	open_fd(char *path, char *extension, int o_flags)
+void	display_float(char *text, float f)
 {
-	int	fd;
-
-	fd = open(path, o_flags);
-	if (fd == -1)
-		return (broadcast(ERR_FILE_NOT_FOUND, NULL), -1);
-	while (*path && *path != '.')
-		path++;
-	if (ft_strcmp(path, extension))
-		return (broadcast(ERR_FILE_EXTENSION, NULL), -1);
-	return (fd);
+	printf("%s: %.2f\n", text, f);
 }
 
-t_content	*new_content(char *line)
+void	display_color(char *text, t_rgb color)
 {
-	t_content	*new;
-
-	new = malloc(sizeof(*new));
-	if (!new)
-		return (NULL);
-	new->line = ft_strdup(line);
-	new->next = NULL;
-	return (new);
+	printf("%s: %u, %u, %u\n", text, color.r, color.g, color.b);
 }
 
-void	add_content(t_content **content, t_content *new)
+void	display_vector(char *text, t_vector v)
 {
-	ft_lstadd_back((void **)content, (void *)new);
+	printf("%s: %.2f, %.2f, %.2f\n", text, v.x, v.y, v.z);
 }
 
-t_content	*read_fd(int fd)
+void	close_scene(t_scene *scene, int status)
 {
-	char		*line;
-	t_content	*file;
-
-	file = NULL;
-	line = get_next_line(fd);
-	while (line)
+	if (scene->window && status)
 	{
-		add_content(&file, new_content(line));
-		free(line);
-		line = get_next_line(fd);
+		puts(mlx_strerror(mlx_errno));
+		mlx_close_window(scene->window);
 	}
-	return (file);
+	clear_scene("miniRT closed", status);
 }
 
-void	clear_content(t_content *content)
+void	clear_scene(char *msg, int exitcode)
 {
-	t_content	*tmp;
-
-	while (content)
-	{
-		tmp = content;
-		content = content->next;
-		free(tmp->line);
-		free(tmp);
-	}
+	gct_cleanup();
+	ft_exit(msg, exitcode);
 }

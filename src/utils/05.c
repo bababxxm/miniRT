@@ -1,38 +1,64 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   05.c                                               :+:      :+:    :+:   */
+/*   06.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/05 18:46:44 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/17 02:18:16 by sklaokli         ###   ########.fr       */
+/*   Created: 2025/07/17 02:12:51 by sklaokli          #+#    #+#             */
+/*   Updated: 2025/07/31 22:35:36 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	put_pixel(t_rgb color)
+float	square(float x)
 {
-	return (color.r << 24 | color.g << 16 | color.b << 8 | 255);
+	return (x * x);
 }
 
-t_rgb	rgb(int r, int g, int b)
+float	quadratic_equation(float a, float b, float c, t_hit *hit)
 {
-	t_rgb	color;
+	float	t1;
+	float	t2;
+	float	discriminant;
 
-	color.r = r;
-	color.g = g;
-	color.b = b;
-	return (color);
+	if (fabsf(a) < EPSILON)
+		return (-1);
+	discriminant = square(b) - 4.0f * a * c;
+	if (discriminant < 0)
+		return (-1);
+	discriminant = sqrtf(discriminant);
+	t1 = (-b - discriminant) / (2.0f * a);
+	t2 = (-b + discriminant) / (2.0f * a);
+	if (t1 > EPSILON && t1 < hit->t)
+		return (t1);
+	else if (t2 > EPSILON && t2 < hit->t)
+		return (t2);
+	return (-1);
 }
 
-t_vector	vec3(float x, float y, float z)
+bool	intersect_plane(t_ray ray, t_vector normal, t_vector point, float *t)
 {
-	t_vector	vector;
+	float	denom;
+	float	numer;
 
-	vector.x = x;
-	vector.y = y;
-	vector.z = z;
-	return (vector);
+	denom = vec3_dot(ray.direction, normal);
+	if (fabs(denom) < EPSILON)
+		return (false);
+	numer = vec3_dot(vec3_sub(point, ray.origin), normal);
+	*t = numer / denom;
+	return (*t > 0);
+}
+
+t_cap	create_cap(t_cylinder *cylinder, t_vector axis, t_vector center)
+{
+	t_cap	cap;
+
+	cap.radius = cylinder->radius;
+	cap.color = cylinder->color;
+	cap.axis = axis;
+	cap.center = center;
+	cap.hit = false;
+	return (cap);
 }

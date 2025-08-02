@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:34:44 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/02 01:16:37 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/02 21:45:26 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,21 @@ static void	init_scene(t_scene *scene)
 	scene->image = NULL;
 	scene->ambient = NULL;
 	scene->camera = NULL;
+}
+
+static bool	read_scene(char *path, t_scene *scene)
+{
+	t_file	*file;
+
+	file = open_file(path, ".rt", O_RDONLY);
+	if (!file)
+		return (false);
+	if (!read_file(file))
+		return (close_file(file), false);
+	if (!parse_scene(file, scene))
+		return (close_file(file), false);
+	close_file(file);
+	return (true);
 }
 
 static void	render_scene(t_scene *scene)
@@ -45,6 +60,6 @@ int	main(int argc, char **argv)
 	if (!read_scene(argv[1], scene))
 		clear_scene(NULL, FAILURE);
 	display_info(scene);
-	render_scene(scene);
+	// render_scene(scene);
 	close_scene(scene, SUCCESS);
 }

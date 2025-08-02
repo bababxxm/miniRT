@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 16:45:36 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/31 23:37:02 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/02 21:41:20 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,8 @@ typedef struct s_scene
 	t_object	*object;
 }	t_scene;
 
-bool	parse_args(int argc, char **argv);
-
+void	display_info(t_scene *scene);
 void	ray_tracing(void *context);
 void	keybinds(mlx_key_data_t key, void *context);
-
-void	display_info(t_scene *scene);
-void	clear_scene(char *msg, int exitcode);
-void	close_scene(t_scene *scene, int status);
-
-bool	read_scene(char *path, t_scene *scene);
-int		put_pixel(t_rgb color);
 
 #endif
