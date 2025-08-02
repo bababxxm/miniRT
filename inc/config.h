@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 01:57:45 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/02 21:41:17 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/02 21:48:14 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,5 @@ void	display_vector(char *text, t_vector v);
 int		put_pixel(t_rgb color);
 void	clear_scene(char *msg, int exitcode);
 void	close_scene(t_scene *scene, int status);
-
 
 #endif

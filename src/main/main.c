@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 17:34:44 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/02 21:45:26 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/02 21:48:19 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ int	main(int argc, char **argv)
 	if (!read_scene(argv[1], scene))
 		clear_scene(NULL, FAILURE);
 	display_info(scene);
-	// render_scene(scene);
+	render_scene(scene);
 	close_scene(scene, SUCCESS);
 }
