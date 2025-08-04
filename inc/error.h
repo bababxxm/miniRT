@@ -6,16 +6,14 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 23:36:29 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/01 01:14:58 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/04 11:17:22 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERROR_H
 # define ERROR_H
 
-# define ERR_FILE_INVALID "Please provide a .rt file."
-# define ERR_FILE_NOT_FOUND "File not found."
-# define ERR_FILE_EXTENSION "Unsupported file extension. Expected .rt."
+# define ERR_FILE "Expected an existing .rt file."
 # define ERR_ELEMENT_UNKNOWN "Unknown element encountered."
 # define ERR_ELEMENT_DUPLICATE "Duplicate singleton element."
 # define ERR_ELEMENT_MISSING "Missing required scene element."

@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 01:57:45 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/02 21:48:14 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/04 11:20:08 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include "MLX42/MLX42.h"
 # include "MLX42/MLX42_Int.h"
 
-# define SUCCESS EXIT_FAILURE
-# define FAILURE EXIT_SUCCESS
+# define SUCCESS EXIT_SUCCESS
+# define FAILURE EXIT_FAILURE
 
 typedef struct s_rgb		t_rgb;
 typedef struct s_vector		t_vector;
