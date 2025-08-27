@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 02:11:03 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/24 21:22:13 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/04 21:47:23 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ t_ray	compute_ray(float px, float py, t_camera *camera)
 	t_vector	direction;
 
 	ray.origin = camera->position;
-	right_offset = vec3_mul(camera->right, px);
-	up_offset = vec3_mul(camera->up, py);
-	direction = vec3_add(camera->direction, right_offset);
-	direction = vec3_add(direction, up_offset);
-	ray.direction = vec3_normalize(direction);
+	right_offset = mul(camera->right, px);
+	up_offset = mul(camera->up, py);
+	direction = add(camera->direction, right_offset);
+	direction = add(direction, up_offset);
+	ray.direction = normalize(direction);
 	return (ray);
 }
 

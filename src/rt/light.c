@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 02:11:57 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/01 22:55:47 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/04 21:48:38 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,17 @@ t_rgb	compute_ambient(t_rgb hit, t_ambient *ambient)
 
 t_rgb	compute_diffuse(t_hit *hit, t_light *light)
 {
-	float		dot;
+	float		point;
 	t_rgb		color;
 	float		intensity;
 	t_vector	direction;
 
-	direction = vec3_sub(light->positon, hit->point);
-	direction = vec3_normalize(direction);
-	dot = vec3_dot(hit->normalized, direction);
-	if (dot < 0)
-		dot = 0;
-	intensity = light->brightness * dot;
+	direction = sub(light->positon, hit->point);
+	direction = normalize(direction);
+	point = dot(hit->normalized, direction);
+	if (point < 0)
+		point = 0;
+	intensity = light->brightness * point;
 	color.r = hit->color.r * light->color.r / 255.0f * intensity;
 	color.g = hit->color.g * light->color.g / 255.0f * intensity;
 	color.b = hit->color.b * light->color.b / 255.0f * intensity;

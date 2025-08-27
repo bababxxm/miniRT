@@ -6,7 +6,7 @@
 #    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/08 16:45:27 by sklaokli          #+#    #+#              #
-#    Updated: 2025/08/02 21:43:00 by sklaokli         ###   ########.fr        #
+#    Updated: 2025/08/27 23:12:37 by sklaokli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,6 @@ MLX			:=	$(MLX_DIR)/build/libmlx42.a
 LIB			:=	$(LIBFT) $(MLX)
 
 FILES		:=	main/main.c \
-				main/info.c \
 				\
 				init/reader.c \
 				init/parser.c \
@@ -47,12 +46,14 @@ FILES		:=	main/main.c \
 				rt/light.c \
 				rt/shadow.c \
 				\
-				utils/00.c \
-				utils/01.c \
-				utils/02.c \
-				utils/03.c \
-				utils/04.c \
-				utils/05.c
+				utils/color.c \
+				utils/display.c \
+				utils/display2.c \
+				utils/equation.c \
+				utils/parser.c \
+				utils/program.c \
+				utils/vector.c \
+				utils/vector2.c
 
 SRC			:=	$(addprefix $(SRC_DIR)/, $(FILES))
 BIN			:=	$(addprefix $(BIN_DIR)/, $(FILES:.c=.o))

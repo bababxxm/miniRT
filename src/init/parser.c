@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 23:32:42 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/28 20:00:02 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/04 21:47:37 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ bool	parse_rgb(t_rgb *color, char *str)
 	return (true);
 }
 
-bool	parse_vec3(t_vector *vec, char *str, float min, float max)
+bool	parse_vector(t_vector *vec, char *str, float min, float max)
 {
 	char	**args;
 

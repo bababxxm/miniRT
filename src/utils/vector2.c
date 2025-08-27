@@ -1,38 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   05.c                                               :+:      :+:    :+:   */
+/*   vector2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/05 18:46:44 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/17 02:18:16 by sklaokli         ###   ########.fr       */
+/*   Created: 2025/07/05 18:45:49 by sklaokli          #+#    #+#             */
+/*   Updated: 2025/08/27 23:19:08 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-int	put_pixel(t_rgb color)
+t_vector	normalize(t_vector v)
 {
-	return (color.r << 24 | color.g << 16 | color.b << 8 | 255);
+	float	f;
+
+	f = sqrtf(dot(v, v));
+	v.x = v.x / f;
+	v.y = v.y / f;
+	v.z = v.z / f;
+	return (v);
 }
 
-t_rgb	rgb(int r, int g, int b)
-{
-	t_rgb	color;
-
-	color.r = r;
-	color.g = g;
-	color.b = b;
-	return (color);
-}
-
-t_vector	vec3(float x, float y, float z)
+t_vector	cross(t_vector u, t_vector v)
 {
 	t_vector	vector;
 
-	vector.x = x;
-	vector.y = y;
-	vector.z = z;
+	vector.x = u.y * v.z - u.z * v.y;
+	vector.y = u.z * v.x - u.x * v.z;
+	vector.z = u.x * v.y - u.y * v.x;
 	return (vector);
+}
+
+float	length(t_vector u)
+{
+	return (sqrtf((u.x * u.x) + (u.y * u.y) + (u.z * u.z)));
 }

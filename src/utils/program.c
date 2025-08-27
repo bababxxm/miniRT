@@ -1,31 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   04.c                                               :+:      :+:    :+:   */
+/*   program.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/05 18:45:49 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/01 00:16:36 by sklaokli         ###   ########.fr       */
+/*   Created: 2025/08/27 23:10:26 by sklaokli          #+#    #+#             */
+/*   Updated: 2025/08/27 23:12:01 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-
-t_vector	vec3_cross(t_vector u, t_vector v)
-{
-	t_vector	vec3;
-
-	vec3.x = u.y * v.z - u.z * v.y;
-	vec3.y = u.z * v.x - u.x * v.z;
-	vec3.z = u.x * v.y - u.y * v.x;
-	return (vec3);
-}
-
-float	vec3_length(t_vector u)
-{
-	return (sqrtf((u.x * u.x) + (u.y * u.y) + (u.z * u.z)));
-}
 
 bool	broadcast(char *msg1, char *msg2)
 {
@@ -40,4 +25,20 @@ bool	broadcast(char *msg1, char *msg2)
 	else if (msg2)
 		ft_putendl_fd(msg2, 2);
 	return (false);
+}
+
+void	close_scene(t_scene *scene, int status)
+{
+	if (scene->window && status)
+	{
+		puts(mlx_strerror(mlx_errno));
+		mlx_close_window(scene->window);
+	}
+	clear_scene("miniRT closed", status);
+}
+
+void	clear_scene(char *msg, int exitcode)
+{
+	gct_cleanup();
+	ft_exit(msg, exitcode);
 }

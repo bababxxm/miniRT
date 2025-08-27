@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   06.c                                               :+:      :+:    :+:   */
+/*   equation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 02:12:51 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/31 22:35:36 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/27 23:20:17 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ bool	intersect_plane(t_ray ray, t_vector normal, t_vector point, float *t)
 	float	denom;
 	float	numer;
 
-	denom = vec3_dot(ray.direction, normal);
+	denom = dot(ray.direction, normal);
 	if (fabs(denom) < EPSILON)
 		return (false);
-	numer = vec3_dot(vec3_sub(point, ray.origin), normal);
+	numer = dot(sub(point, ray.origin), normal);
 	*t = numer / denom;
 	return (*t > 0);
 }

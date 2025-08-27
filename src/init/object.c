@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 22:35:34 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/01 23:25:32 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/04 21:47:37 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	parse_sphere(t_scene *scene, char **args)
 	sphere = gct_malloc(sizeof(t_sphere));
 	sphere->type = identify_object(args[0]);
 	sphere->next = NULL;
-	if (!parse_vec3(&sphere->center, args[1], -100.0f, 100.0f))
+	if (!parse_vector(&sphere->center, args[1], -100.0f, 100.0f))
 		return (broadcast(ERR_SPHERE_CENTER, ERR_VECTOR_FORMAT));
 	if (!parse_float(&sphere->radius, args[2], 0.0f, 1000.0f))
 		return (broadcast(ERR_SPHERE_RADIUS, NULL));
@@ -45,9 +45,9 @@ bool	parse_plane(t_scene *scene, char **args)
 	plane = gct_malloc(sizeof(t_plane));
 	plane->type = identify_object(args[0]);
 	plane->next = NULL;
-	if (!parse_vec3(&plane->position, args[1], -100.0f, 100.0f))
+	if (!parse_vector(&plane->position, args[1], -100.0f, 100.0f))
 		return (broadcast(ERR_PLANE_POSITION, NULL));
-	if (!parse_vec3(&plane->normal, args[2], -1.0f, 1.0f))
+	if (!parse_vector(&plane->normal, args[2], -1.0f, 1.0f))
 		return (broadcast(ERR_PLANE_NORMAL, NULL));
 	if (!parse_rgb(&plane->color, args[3]))
 		return (broadcast(ERR_PLANE_COLOR, ERR_RGB_FORMAT));
@@ -64,9 +64,9 @@ bool	parse_cylinder(t_scene *scene, char **args)
 	cylinder = gct_malloc(sizeof(t_cylinder));
 	cylinder->type = identify_object(args[0]);
 	cylinder->next = NULL;
-	if (!parse_vec3(&cylinder->center, args[1], -100.0f, 100.0f))
+	if (!parse_vector(&cylinder->center, args[1], -100.0f, 100.0f))
 		return (broadcast(ERR_CYLINDER_CENTER, ERR_VECTOR_FORMAT));
-	if (!parse_vec3(&cylinder->axis, args[2], -1.0f, 1.0f))
+	if (!parse_vector(&cylinder->axis, args[2], -1.0f, 1.0f))
 		return (broadcast(ERR_CYLINDER_AXIS, ERR_VECTOR_FORMAT));
 	if (!parse_float(&cylinder->radius, args[3], 0.0f, 1000.0f))
 		return (broadcast(ERR_CYLINDER_RADIUS, NULL));

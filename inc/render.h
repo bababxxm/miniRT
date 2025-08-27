@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:35:30 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/02 01:16:31 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/04 21:47:37 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ float		square(float x);
 int			put_pixel(t_rgb color);
 t_rgb		rgb(int r, int g, int b);
 
-t_vector	vec3(float x, float y, float z);
-float		vec3_dot(t_vector u, t_vector v);
-t_vector	vec3_add(t_vector u, t_vector v);
-t_vector	vec3_sub(t_vector u, t_vector v);
-t_vector	vec3_mul(t_vector u, float f);
-t_vector	vec3_normalize(t_vector v);
-float		vec3_length(t_vector u);
-t_vector	vec3_cross(t_vector u, t_vector v);
+t_vector	vector(float x, float y, float z);
+float		dot(t_vector u, t_vector v);
+t_vector	add(t_vector u, t_vector v);
+t_vector	sub(t_vector u, t_vector v);
+t_vector	mul(t_vector u, float f);
+t_vector	normalize(t_vector v);
+float		length(t_vector u);
+t_vector	cross(t_vector u, t_vector v);
 
 t_rgb		clamp(t_rgb color);
 t_rgb		compute_ambient(t_rgb hit, t_ambient *ambient);

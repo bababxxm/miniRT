@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   02.c                                               :+:      :+:    :+:   */
+/*   display2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 15:09:53 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/31 23:26:36 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/27 23:12:06 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,4 @@ void	display_color(char *text, t_rgb color)
 void	display_vector(char *text, t_vector v)
 {
 	printf("%s: %.2f, %.2f, %.2f\n", text, v.x, v.y, v.z);
-}
-
-void	close_scene(t_scene *scene, int status)
-{
-	if (scene->window && status)
-	{
-		puts(mlx_strerror(mlx_errno));
-		mlx_close_window(scene->window);
-	}
-	clear_scene("miniRT closed", status);
-}
-
-void	clear_scene(char *msg, int exitcode)
-{
-	gct_cleanup();
-	ft_exit(msg, exitcode);
 }

@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera.c                                           :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/17 02:10:00 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/04 21:47:37 by sklaokli         ###   ########.fr       */
+/*   Created: 2025/07/05 18:46:44 by sklaokli          #+#    #+#             */
+/*   Updated: 2025/08/27 23:18:12 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	setup_camera(t_camera *camera)
+int	put_pixel(t_rgb color)
 {
-	t_vector	up;
-	t_vector	right;
+	return (color.r << 24 | color.g << 16 | color.b << 8 | 255);
+}
 
-	up = vector(0, 0, 1);
-	right = vector(0, -1, 0);
-	camera->direction = normalize(camera->direction);
-	right = cross(camera->direction, right);
-	if (length(right) < EPSILON)
-		right = cross(camera->direction, up);
-	camera->right = normalize(right);
-	up = cross(camera->right, camera->direction);
-	camera->up = normalize(up);
+t_rgb	rgb(int r, int g, int b)
+{
+	t_rgb	color;
+
+	color.r = r;
+	color.g = g;
+	color.b = b;
+	return (color);
 }

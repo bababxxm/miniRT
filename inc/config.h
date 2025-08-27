@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 01:57:45 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/04 11:20:08 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/04 21:47:37 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	parse_args(int argc, char **argv);
 bool	parse_int(int *ptr, char *str, int min, int max);
 bool	parse_float(float *ptr, char *str, float min, float max);
 bool	parse_rgb(t_rgb *color, char *str);
-bool	parse_vec3(t_vector *vec, char *str, float min, float max);
+bool	parse_vector(t_vector *vec, char *str, float min, float max);
 
 bool	parse_ambient(t_scene *scene, char **args);
 bool	parse_camera(t_scene *scene, char **args);

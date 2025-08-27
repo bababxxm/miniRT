@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 02:07:28 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/01 23:27:26 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/08/04 21:47:23 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ bool	is_in_shadow(t_vector point, t_light *light, t_scene *scene)
 	t_ray		shadow;
 	t_vector	direction;
 
-	direction = vec3_sub(light->positon, point);
-	direction = vec3_normalize(direction);
-	t = vec3_length(direction);
-	direction = vec3_normalize(direction);
-	shadow.origin = vec3_add(point, vec3_mul(direction, 0));
+	direction = sub(light->positon, point);
+	direction = normalize(direction);
+	t = length(direction);
+	direction = normalize(direction);
+	shadow.origin = add(point, mul(direction, 0));
 	shadow.direction = direction;
 	return (compute_shadow(shadow, t, scene->object));
 }
