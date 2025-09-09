@@ -6,45 +6,44 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 02:11:57 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/04 21:48:38 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/09/04 02:13:01 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-t_rgb	clamp(t_rgb color)
-{
-	color.r = fminf(fmaxf(color.r, 0.0f), 255.0f);
-	color.g = fminf(fmaxf(color.g, 0.0f), 255.0f);
-	color.b = fminf(fmaxf(color.b, 0.0f), 255.0f);
-	return (color);
-}
-
 t_rgb	compute_ambient(t_rgb hit, t_ambient *ambient)
 {
 	t_rgb	color;
 
-	color.r = hit.r * ambient->color.r / 255.0f * ambient->ratio;
-	color.g = hit.g * ambient->color.r / 255.0f * ambient->ratio;
-	color.b = hit.b * ambient->color.r / 255.0f * ambient->ratio;
-	return (color);
+	color = modulate_color(hit, ambient->color);
+	return (scale_color(color, ambient->ratio));
 }
 
 t_rgb	compute_diffuse(t_hit *hit, t_light *light)
 {
-	float		point;
 	t_rgb		color;
+	float		dotnl;
 	float		intensity;
 	t_vector	direction;
 
-	direction = sub(light->positon, hit->point);
-	direction = normalize(direction);
-	point = dot(hit->normalized, direction);
-	if (point < 0)
-		point = 0;
-	intensity = light->brightness * point;
-	color.r = hit->color.r * light->color.r / 255.0f * intensity;
-	color.g = hit->color.g * light->color.g / 255.0f * intensity;
-	color.b = hit->color.b * light->color.b / 255.0f * intensity;
-	return (color);
+	direction = normalize(sub(light->positon, hit->point));
+	dotnl = fmaxf(dot(hit->normal, direction), 0.0f);
+	intensity = light->brightness * dotnl;
+	color = modulate_color(hit->color, light->color);
+	return (scale_color(color, intensity));
+}
+
+t_rgb	compute_lighting(t_hit *hit, t_ambient *amb, t_light *light)
+{
+	t_rgb	color;
+	t_rgb	ambient;
+	t_rgb	diffuse;
+
+	ambient = compute_ambient(hit->color, amb);
+	diffuse = compute_diffuse(hit, light);
+	color.r = ambient.r + diffuse.r;
+	color.g = ambient.g + diffuse.g;
+	color.b = ambient.b + diffuse.b;
+	return (clamp(color));
 }

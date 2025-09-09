@@ -1,0 +1,17 @@
+# Camera
+C 0,2,-5    0,-0.5,1    60
+
+# Ambient light
+A 0.3 255,255,255
+
+# White ceiling light
+L 5,5,-5    0.8 255,255,255
+
+# Ground plane
+pl 0,-1,0   0,1,0   200,200,200
+
+# Left wall (red)
+pl -2,0,0   1,0,0   200,50,50
+
+# Right wall (blue)
+pl 2,0,0    -1,0,0  50,50,200

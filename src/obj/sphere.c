@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 02:07:57 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/27 22:53:23 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/09/09 19:30:23 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ bool	hit_sphere(t_ray ray, t_sphere *sphere, t_hit *hit)
 		return (false);
 	hit->t = t;
 	hit->point = add(ray.origin, mul(ray.direction, t));
-	hit->normalized = normalize(sub(hit->point, sphere->center));
+	hit->normal = normalize(sub(hit->point, sphere->center));
 	hit->color = sphere->color;
 	hit->found = true;
 	return (true);

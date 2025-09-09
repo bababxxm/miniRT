@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 02:11:21 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/07/31 21:46:11 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/09/04 02:34:36 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static t_rgb	trace_light(t_hit *hit, t_scene *scene)
 	color = compute_ambient(hit->color, ambient);
 	while (light)
 	{
-		if (!is_in_shadow(hit->point, light, scene))
+		if (!is_in_shadow(hit, light, scene))
 		{
 			diffuse = compute_diffuse(hit, light);
 			color.r = color.r + diffuse.r;

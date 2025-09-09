@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 23:28:39 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/27 23:28:40 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/09/04 03:00:27 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define WINX 2048
 # define WINY 1024
 
-# define EPSILON 1e-2
+# define EPSILON 1e-4
 
 typedef enum e_type
 {

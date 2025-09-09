@@ -6,13 +6,13 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 02:07:28 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/04 21:47:23 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/09/04 03:00:17 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-static bool	compute_shadow(t_ray shadow, float max_t, t_object *object)
+bool	compute_shadow(t_ray shadow, float max_t, t_object *object)
 {
 	t_hit	hit;
 
@@ -30,17 +30,15 @@ static bool	compute_shadow(t_ray shadow, float max_t, t_object *object)
 	return (false);
 }
 
-bool	is_in_shadow(t_vector point, t_light *light, t_scene *scene)
+bool	is_in_shadow(t_hit *hit, t_light *light, t_scene *scene)
 {
+	t_vector	u;
 	float		t;
 	t_ray		shadow;
-	t_vector	direction;
 
-	direction = sub(light->positon, point);
-	direction = normalize(direction);
-	t = length(direction);
-	direction = normalize(direction);
-	shadow.origin = add(point, mul(direction, 0));
-	shadow.direction = direction;
+	u = sub(light->positon, hit->point);
+	t = length(u);
+	shadow.origin = add(hit->point, mul(hit->normal, EPSILON));
+	shadow.direction = normalize(u);
 	return (compute_shadow(shadow, t, scene->object));
 }

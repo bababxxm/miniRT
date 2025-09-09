@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 02:09:01 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/04 21:47:23 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/09/09 16:20:29 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static bool	hit_cylinder_body(t_ray ray, t_vector axis,
 		return (false);
 	hit->t = t;
 	hit->point = point;
-	hit->normalized = cylinder_normal(axis, cylinder, point);
+	hit->normal = cylinder_normal(axis, cylinder, point);
 	hit->color = cylinder->color;
 	hit->found = true;
 	return (true);
@@ -81,9 +81,9 @@ static bool	hit_cylinder_cap(t_ray ray, t_cap cap, t_hit *hit)
 	hit->t = t;
 	hit->point = point;
 	if (dot(ray.direction, cap.axis) > EPSILON)
-		hit->normalized = mul(cap.axis, -1);
+		hit->normal = mul(cap.axis, -1);
 	else
-		hit->normalized = cap.axis;
+		hit->normal = cap.axis;
 	hit->color = cap.color;
 	hit->found = true;
 	return (true);

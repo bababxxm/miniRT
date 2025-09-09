@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 02:09:28 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/04 21:47:23 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/09/04 02:38:15 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ bool	hit_plane(t_ray ray, t_plane *plane, t_hit *hit)
 	t = dot(p0l0, normal) / denom;
 	if (t < EPSILON || t > hit->t)
 		return (false);
-	if (denom > 0)
+	if (denom > EPSILON)
 		normal = mul(normal, -1);
 	hit->t = t;
 	hit->point = add(ray.origin, mul(ray.direction, t));
-	hit->normalized = normal;
+	hit->normal = normal;
 	hit->color = plane->color;
 	hit->found = true;
 	return (true);

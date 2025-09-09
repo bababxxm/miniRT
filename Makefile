@@ -6,7 +6,7 @@
 #    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/08 16:45:27 by sklaokli          #+#    #+#              #
-#    Updated: 2025/08/27 23:12:37 by sklaokli         ###   ########.fr        #
+#    Updated: 2025/09/04 02:02:45 by sklaokli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ FILES		:=	main/main.c \
 				obj/cylinder.c \
 				\
 				rt/hook.c \
-				rt/camera.c \
+				rt/keybinds.c \
 				rt/ray.c \
 				rt/trace.c \
 				rt/light.c \
