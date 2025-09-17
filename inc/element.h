@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:44:24 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/27 23:26:22 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/09/10 15:09:19 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_ambient
 typedef struct s_camera
 {
 	int			type;
-	t_vector	position;
+	t_vector	point;
 	t_vector	direction;
 	t_vector	up;
 	t_vector	right;
@@ -48,7 +48,7 @@ typedef struct s_light
 {
 	struct s_light	*next;
 	int				type;
-	t_vector		positon;
+	t_vector		point;
 	float			brightness;
 	t_rgb			color;
 }	t_light;

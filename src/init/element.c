@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 00:12:35 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/04 21:47:37 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/09/10 15:11:53 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ bool	parse_camera(t_scene *scene, char **args)
 	scene->camera = gct_malloc(sizeof(t_camera));
 	camera = scene->camera;
 	camera->type = identify_object(args[0]);
-	if (!parse_vector(&camera->position, args[1], -100.0f, 100.0f))
+	if (!parse_vector(&camera->point, args[1], -100.0f, 100.0f))
 		return (broadcast(ERR_CAMERA_POSITION, NULL));
 	if (!parse_vector(&camera->direction, args[2], -1.0f, 1.0f))
 		return (broadcast(ERR_CAMERA_DIRECTION, NULL));
@@ -68,7 +68,7 @@ bool	parse_light(t_scene *scene, char **args)
 	light = gct_malloc(sizeof(t_light));
 	light->type = identify_object(args[0]);
 	light->next = NULL;
-	if (!parse_vector(&light->positon, args[1], -100.0f, 100.0f))
+	if (!parse_vector(&light->point, args[1], -100.0f, 100.0f))
 		return (broadcast(ERR_LIGHT_POSITION, NULL));
 	if (!parse_float(&light->brightness, args[2], 0.0f, 1.0f))
 		return (broadcast(ERR_LIGHT_BRIGHTNESS, NULL));

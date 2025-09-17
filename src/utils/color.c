@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 18:46:44 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/09/09 20:34:20 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/09/10 14:29:51 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ t_rgb	rgb(int r, int g, int b)
 	color.r = r;
 	color.g = g;
 	color.b = b;
+	return (color);
+}
+
+t_rgb	add_color(t_rgb a, t_rgb b)
+{
+	t_rgb	color;
+
+	color.r = a.r + b.r;
+	color.g = a.g + b.g;
+	color.b = a.b + b.b;
 	return (color);
 }
 

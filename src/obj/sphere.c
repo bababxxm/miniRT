@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 02:07:57 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/09/09 20:15:32 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/09/10 15:11:30 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static float	compute_sphere(t_ray ray, t_sphere *sphere, t_hit *hit)
 	float		t;
 	t_vector	oc;
 
-	oc = sub(ray.origin, sphere->center);
+	oc = sub(ray.origin, sphere->point);
 	t = quadratic_equation(
 			dot(ray.direction, ray.direction),
 			2.0f * dot(oc, ray.direction),
@@ -35,7 +35,7 @@ bool	hit_sphere(t_ray ray, t_sphere *sphere, t_hit *hit)
 		return (false);
 	hit->t = t;
 	hit->point = add(ray.origin, mul(ray.direction, t));
-	hit->normal = normalize(sub(hit->point, sphere->center));
+	hit->normal = normalize(sub(hit->point, sphere->point));
 	hit->color = sphere->color;
 	hit->found = true;
 	return (true);

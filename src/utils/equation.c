@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 02:12:51 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/27 23:20:17 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/09/10 15:11:55 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_cap	create_cap(t_cylinder *cylinder, t_vector axis, t_vector center)
 	cap.radius = cylinder->radius;
 	cap.color = cylinder->color;
 	cap.axis = axis;
-	cap.center = center;
+	cap.point = center;
 	cap.hit = false;
 	return (cap);
 }

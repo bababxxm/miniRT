@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   errmsg.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 23:36:29 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/08/04 11:17:22 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/09/15 20:41:15 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#ifndef ERRMSG_H
+# define ERRMSG_H
 
 # define ERR_FILE "Expected an existing .rt file."
 # define ERR_ELEMENT_UNKNOWN "Unknown element encountered."

@@ -6,7 +6,7 @@
 /*   By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 14:35:30 by sklaokli          #+#    #+#             */
-/*   Updated: 2025/09/09 18:53:10 by sklaokli         ###   ########.fr       */
+/*   Updated: 2025/09/15 20:40:33 by sklaokli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_hit
 float		square(float x);
 
 t_rgb		rgb(int r, int g, int b);
+t_rgb		add_color(t_rgb a, t_rgb b);
 t_rgb		scale_color(t_rgb color, float scale);
 t_rgb		modulate_color(t_rgb a, t_rgb b);
 t_rgb		clamp(t_rgb color);
@@ -47,7 +48,7 @@ float		length(t_vector u);
 t_vector	cross(t_vector u, t_vector v);
 
 t_rgb		clamp(t_rgb color);
-t_rgb		compute_ambient(t_rgb hit, t_ambient *ambient);
+t_rgb		compute_ambient(t_hit *hit, t_ambient *ambient);
 t_rgb		compute_diffuse(t_hit *hit, t_light *light);
 float		quadratic_equation(float a, float b, float c, t_hit *hit);
 bool		object_hit(t_ray ray, t_object *object, t_hit *hit);

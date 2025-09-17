@@ -6,18 +6,25 @@
 #    By: sklaokli <sklaokli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/08 16:45:27 by sklaokli          #+#    #+#              #
-#    Updated: 2025/09/04 02:02:45 by sklaokli         ###   ########.fr        #
+#    Updated: 2025/09/15 20:47:24 by sklaokli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	minirt
+NAME		:=	miniRT
 
 SRC_DIR		:=	src
 BIN_DIR		:=	bin
 INC_DIR		:=	inc
 LIB_DIR		:=	lib
 
-DEP			:=	$(addprefix $(INC_DIR)/, minirt.h)
+HEADERS		:=	minirt.h \
+				config.h \
+				element.h \
+				object.h \
+				render.h \
+				errmsg.h
+
+DEPS		:=	$(addprefix $(INC_DIR)/, $(HEADERS))
 LIBFT_DIR	:=	$(addprefix $(LIB_DIR)/, libft)
 MLX_DIR		:=	$(addprefix $(LIB_DIR)/, mlx42)
 
@@ -39,12 +46,11 @@ FILES		:=	main/main.c \
 				obj/plane.c \
 				obj/cylinder.c \
 				\
-				rt/hook.c \
-				rt/keybinds.c \
-				rt/ray.c \
-				rt/trace.c \
-				rt/light.c \
-				rt/shadow.c \
+				minirt/minirt.c \
+				minirt/keybinds.c \
+				minirt/ray.c \
+				minirt/trace.c \
+				minirt/light.c \
 				\
 				utils/color.c \
 				utils/display.c \
